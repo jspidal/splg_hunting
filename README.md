@@ -1,10 +1,10 @@
-# nfire_hunting
-Fivem Hunting script made for ox_inventory
+# mana_hunting
+Fivem Hunting script made for ox_inventory. Forked from nfire_hunting
 
 Preview : https://youtu.be/1Fzb0yB0jn0
 ![image](https://user-images.githubusercontent.com/55892717/163342386-b07ff6ee-0316-4f18-a060-727fdc35afed.png)
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/O4O87T3LC)
+[original author Nfire's ko-fi](https://ko-fi.com/O4O87T3LC)
 
 ## Features:
 - Allow the player to hunt animals naturally spawning.
@@ -12,13 +12,6 @@ Preview : https://youtu.be/1Fzb0yB0jn0
 - Carcass quality is defined by the type weapon used and if the animal has been headshot
 - Anti-farm (force player to not stay on the same animal spawn point)
 - Carcass degradation (sell price will decrease overtime)
-### TODO:
-- Clean Animation
-- Optimisation
-#### Maybe:
-- Add poaching
-- sell point owned by player
-- hunting card
 
 ## Dependencies:
 ox_inventory : https://www.github.com/overextended/ox_inventory/releases/latest
@@ -131,6 +124,9 @@ Item to add :
 
 <br><h2>License</h2>
 <table><tr><td>
+mana_hunting
+Copyright (C) 2023 Manason
+
 nfire_hunting
 
 Copyright (C) 2021	Nfire <https://github.com/N-fire>
