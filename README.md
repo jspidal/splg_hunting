@@ -29,10 +29,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('mana_hunting:CarryCarcass')
+                exports.mana_blindfold:CarryCarcass()
             end,
             remove = function()
-		TriggerEvent('mana_hunting:CarryCarcass')
+				exports.mana_blindfold:CarryCarcass()
             end
         }
 	},
@@ -43,10 +43,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('mana_hunting:CarryCarcass')
+                exports.mana_blindfold:CarryCarcass()
             end,
             remove = function()
-		TriggerEvent('mana_hunting:CarryCarcass')
+				exports.mana_blindfold:CarryCarcass()
             end
         }
 	},
@@ -57,10 +57,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('mana_hunting:CarryCarcass')
+                exports.mana_blindfold:CarryCarcass()
             end,
             remove = function()
-		TriggerEvent('mana_hunting:CarryCarcass')
+				exports.mana_blindfold:CarryCarcass()
             end
         }
 	},
@@ -71,10 +71,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('mana_hunting:CarryCarcass')
+                exports.mana_blindfold:CarryCarcass()
             end,
             remove = function()
-		TriggerEvent('mana_hunting:CarryCarcass')
+				exports.mana_blindfold:CarryCarcass()
             end
         }
 	},
@@ -85,10 +85,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('mana_hunting:CarryCarcass')
+                exports.mana_blindfold:CarryCarcass()
             end,
             remove = function()
-		TriggerEvent('mana_hunting:CarryCarcass')
+				exports.mana_blindfold:CarryCarcass()
             end
         }
 	},
@@ -99,10 +99,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('mana_hunting:CarryCarcass')
+                exports.mana_blindfold:CarryCarcass()
             end,
             remove = function()
-		TriggerEvent('mana_hunting:CarryCarcass')
+				exports.mana_blindfold:CarryCarcass()
             end
         }
 	},
@@ -113,10 +113,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('mana_hunting:CarryCarcass')
+                exports.mana_blindfold:CarryCarcass()
             end,
             remove = function()
-		TriggerEvent('mana_hunting:CarryCarcass')
+				exports.mana_blindfold:CarryCarcass()
             end
         }
 	},

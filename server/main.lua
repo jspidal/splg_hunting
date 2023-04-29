@@ -111,24 +111,3 @@ RegisterNetEvent('mana_hunting:SellCarcass',function (item)
     exports.ox_inventory:RemoveItem(source, item, 1, nil, itemData.slot)
     exports.ox_inventory:AddItem(source, 'money', reward)
 end)
-
--- lib.addCommand('group.admin', 'giveCarcass', function(source, args)
---     for key, value in pairs(Config.carcass) do
---         exports.ox_inventory:AddItem(source, value, 1, {type = '★☆☆', image =  value..1})
---         exports.ox_inventory:AddItem(source, value, 1, {type = '★★☆', image =  value..2})
---         exports.ox_inventory:AddItem(source, value, 1, {type = '★★★', image =  value..3})
---     end
--- end)
-
--- lib.addCommand('group.admin', 'spawnPed', function(source, args)
---     local playerCoords = GetEntityCoords(GetPlayerPed(source))
---     local entity = CreatePed(0, GetHashKey(args.hash), playerCoords, true, true)
--- end,{'hash:string'})
-
--- lib.addCommand('group.admin', 'printAntifarm', function(source, args)
---     print(json.encode(antifarm,{indent = true}))
--- end)
-
--- lib.addCommand('group.admin', 'printInv', function(source, args)
---     print(json.encode(exports.ox_inventory:Inventory(source).items,{indent = true}))
--- end)

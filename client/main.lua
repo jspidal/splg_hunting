@@ -3,8 +3,8 @@ local carriedCarcass = 0
 local heaviestCarcass = 0
 
 local animals = {}
-local listItemCarcass= {}
-local carcassByItem= {}
+local listItemCarcass = {}
+local carcassByItem = {}
 for key, value in pairs(Config.CarcassPos) do
     animals[#animals+1] = key
     listItemCarcass[#listItemCarcass+1] = value.item
@@ -103,6 +103,8 @@ local function carryCarcass()
         playCarryAnim()
     end
 end
+
+exports('CarryCarcass', carryCarcass)
 
 RegisterNetEvent('ox:playerLoaded', function()
     carryCarcass()
