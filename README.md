@@ -18,7 +18,7 @@ ox_inventory : https://www.github.com/overextended/ox_inventory/releases/latest
 
 ox_lib : https://github.com/overextended/ox_lib/releases/latest
 
-qtarget : https://github.com/overextended/qtarget/releases/latest
+ox_target : https://github.com/overextended/ox_target/releases/latest
 
 Item to add :
 ```lua
@@ -29,10 +29,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('nfire_hunting:CarryCarcass')
+                TriggerEvent('mana_hunting:CarryCarcass')
             end,
             remove = function()
-		TriggerEvent('nfire_hunting:CarryCarcass')
+		TriggerEvent('mana_hunting:CarryCarcass')
             end
         }
 	},
@@ -43,10 +43,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('nfire_hunting:CarryCarcass')
+                TriggerEvent('mana_hunting:CarryCarcass')
             end,
             remove = function()
-		TriggerEvent('nfire_hunting:CarryCarcass')
+		TriggerEvent('mana_hunting:CarryCarcass')
             end
         }
 	},
@@ -57,10 +57,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('nfire_hunting:CarryCarcass')
+                TriggerEvent('mana_hunting:CarryCarcass')
             end,
             remove = function()
-		TriggerEvent('nfire_hunting:CarryCarcass')
+		TriggerEvent('mana_hunting:CarryCarcass')
             end
         }
 	},
@@ -71,10 +71,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('nfire_hunting:CarryCarcass')
+                TriggerEvent('mana_hunting:CarryCarcass')
             end,
             remove = function()
-		TriggerEvent('nfire_hunting:CarryCarcass')
+		TriggerEvent('mana_hunting:CarryCarcass')
             end
         }
 	},
@@ -85,10 +85,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('nfire_hunting:CarryCarcass')
+                TriggerEvent('mana_hunting:CarryCarcass')
             end,
             remove = function()
-		TriggerEvent('nfire_hunting:CarryCarcass')
+		TriggerEvent('mana_hunting:CarryCarcass')
             end
         }
 	},
@@ -99,10 +99,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('nfire_hunting:CarryCarcass')
+                TriggerEvent('mana_hunting:CarryCarcass')
             end,
             remove = function()
-		TriggerEvent('nfire_hunting:CarryCarcass')
+		TriggerEvent('mana_hunting:CarryCarcass')
             end
         }
 	},
@@ -113,10 +113,10 @@ Item to add :
 		degrade = 5*60,
 		client = {
             add = function()
-                TriggerEvent('nfire_hunting:CarryCarcass')
+                TriggerEvent('mana_hunting:CarryCarcass')
             end,
             remove = function()
-		TriggerEvent('nfire_hunting:CarryCarcass')
+		TriggerEvent('mana_hunting:CarryCarcass')
             end
         }
 	},
@@ -127,7 +127,7 @@ Item to add :
 mana_hunting
 Copyright (C) 2023 Manason
 
-nfire_hunting
+mana_hunting
 
 Copyright (C) 2021	Nfire <https://github.com/N-fire>
 

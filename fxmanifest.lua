@@ -4,7 +4,7 @@ game 'gta5'
 
 name "mana_hunting"
 description "Hunting Script made for ox_inventory. Fork of nfire_hunting"
-author "Nfire"
+author "Manason"
 version "1.2.0"
 
 dependencies {

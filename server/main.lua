@@ -1,14 +1,14 @@
 lib.locale()
 local antifarm = {}
 
-lib.versionCheck('N-fire/nfire_hunting')
-if not lib.checkDependency('ox_lib', '2.1.0') then error('You don\'t have latest version of ox_lib') end
-if not lib.checkDependency('ox_inventory', '2.7.4') then error('You don\'t have latest version of ox_inventory') end
-if not lib.checkDependency('qtarget', '2.1.0') then error('You don\'t have latest version of qtarget') end
+lib.versionCheck('manason/mana_hunting')
+if not lib.checkDependency('ox_lib', '3.2.1') then error() end
+if not lib.checkDependency('ox_inventory', '2.28.0') then error() end
+if not lib.checkDependency('ox_target', '1.8.0') then error() end
 
 
-RegisterNetEvent('nfire_hunting:harvestCarcass')
-AddEventHandler('nfire_hunting:harvestCarcass',function (entityId, bone)
+RegisterNetEvent('mana_hunting:harvestCarcass')
+AddEventHandler('mana_hunting:harvestCarcass',function (entityId, bone)
     local playerCoords = GetEntityCoords(GetPlayerPed(source))
     local entity = NetworkGetEntityFromNetworkId(entityId)
     local entityCoords = GetEntityCoords(entity)
@@ -47,8 +47,8 @@ function InTable(table, value)
     return false
 end
 
-RegisterNetEvent('nfire_hunting:SellCarcass')
-AddEventHandler('nfire_hunting:SellCarcass',function (item)
+RegisterNetEvent('mana_hunting:SellCarcass')
+AddEventHandler('mana_hunting:SellCarcass',function (item)
     local itemData = exports.ox_inventory:Search(source,'slots', item)[1]
     if itemData.count >= 1 then
         local reward = Config.sellPrice[item].max * Config.gradeMultiplier[itemData.metadata.type]
