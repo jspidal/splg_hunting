@@ -125,9 +125,10 @@ Item to add :
 <br><h2>License</h2>
 <table><tr><td>
 mana_hunting
+
 Copyright (C) 2023 Manason
 
-mana_hunting
+nfire_hunting
 
 Copyright (C) 2021	Nfire <https://github.com/N-fire>
 
