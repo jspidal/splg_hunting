@@ -1,31 +1,20 @@
 Config = {}
 
-Config.carcass  = {
-    [`a_c_boar`]=           'carcass_boar',
-    [`a_c_chickenhawk`] =   'carcass_hawk',
-    [`a_c_cormorant`] =     'carcass_cormorant',
-    [`a_c_coyote`] =        'carcass_coyote',
-    [`a_c_deer`] =          'carcass_deer',
-    [`a_c_mtlion`] =        'carcass_mtlion',
-    [`a_c_rabbit_01`] =     'carcass_rabbit'
+Config.CarcassPos  = {
+    [`a_c_boar`]=           {item = 'carcass_boar', drag = true, xPos = -0.7, yPos = 1.2, zPos = -1.0, xRot = -200.0, yRot = 0.0, zRot = 0.0},
+    [`a_c_chickenhawk`] =   {item = 'carcass_hawk', drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0},
+    [`a_c_cormorant`] =     {item = 'carcass_cormorant', drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.4, xRot = 0.0, yRot = -90.0, zRot = 0.0},
+    [`a_c_coyote`] =        {item = 'carcass_coyote', drag = false, xPos = -0.2, yPos = 0.15, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0},
+    [`a_c_deer`] =          {item = 'carcass_deer', drag = true, xPos = 0.1, yPos = 1.0, zPos = -1.2, xRot = -200.0, yRot = 30.0, zRot = 0.0},
+    [`a_c_mtlion`] =        {item = 'carcass_mtlion', drag = true, xPos = 0.1, yPos = 0.7, zPos = -1.0, xRot = -210.0, yRot = 0.0, zRot = 0.0},
+    [`a_c_rabbit_01`] =     {item = 'carcass_rabbit', drag = false, xPos = 0.12, yPos = 0.25, zPos = 0.45, xRot = 0.0, yRot = 90.0, zRot = 0.0},
 }
 
-
-Config.carcassPos  = {
-    [`a_c_boar`]=           {drag = true, xPos = -0.7, yPos = 1.2, zPos = -1.0, xRot = -200.0, yRot = 0.0, zRot = 0.0},
-    [`a_c_chickenhawk`] =   {drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0},
-    [`a_c_cormorant`] =     {drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.4, xRot = 0.0, yRot = -90.0, zRot = 0.0},
-    [`a_c_coyote`] =        {drag = false, xPos = -0.2, yPos = 0.15, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0},
-    [`a_c_deer`] =          {drag = true, xPos = 0.1, yPos = 1.0, zPos = -1.2, xRot = -200.0, yRot = 30.0, zRot = 0.0},
-    [`a_c_mtlion`] =        {drag = true, xPos = 0.1, yPos = 0.7, zPos = -1.0, xRot = -210.0, yRot = 0.0, zRot = 0.0},
-    [`a_c_rabbit_01`] =     {drag = false, xPos = 0.12, yPos = 0.25, zPos = 0.45, xRot = 0.0, yRot = 90.0, zRot = 0.0},
+Config.GoodWeapon = {
+    `WEAPON_SNIPERRIFLE`,`WEAPON_KNIFE`
 }
 
-Config.goodWeapon = {
-    `WEAPON_MUSKET`,`WEAPON_SNIPERRIFLE`,`WEAPON_KNIFE`
-}
-
-Config.sellPrice = {
+Config.SellPrice = {
     ['carcass_boar'] =      {min = 150,max = 1000}, -- min = 0 durability   max = 100 durability
     ['carcass_hawk'] =      {min = 200,max = 1200},
     ['carcass_cormorant'] = {min = 60,max = 600},
@@ -35,15 +24,15 @@ Config.sellPrice = {
     ['carcass_rabbit'] =    {min = 40,max = 400}
 }
 
-Config.degrade = true
+Config.Degrade = true
 
-Config.gradeMultiplier = {
+Config.GradeMultiplier = {
     ['★☆☆'] = 0.5, -- not killed by a goodWeapon
     ['★★☆'] = 1.0, -- killed by a goodWeapon
     ['★★★'] = 2.0  -- headshot
 }
 
-Config.headshotBones = {
+Config.HeadshotBones = {
     [`a_c_boar`]=           {31086},
     [`a_c_chickenhawk`] =   {39317},
     [`a_c_cormorant`] =     {24818},
@@ -53,6 +42,6 @@ Config.headshotBones = {
     [`a_c_rabbit_01`] =     {31086}
 }
 
-Config.antiFarm = {
+Config.AntiFarm = {
     enable = true, size = 70.0, time = 10 * 60, maxAmount = 3, personal = true
 }

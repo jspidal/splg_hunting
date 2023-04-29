@@ -5,13 +5,14 @@ game 'gta5'
 name "mana_hunting"
 description "Hunting Script made for ox_inventory. Fork of nfire_hunting"
 author "Manason"
-version "1.2.0"
+version "2.0.0"
 
 dependencies {
 	'/server:5181',
 	'/onesync',
 	'ox_lib',
 	'ox_inventory',
+	'ox_target',
 }
 
 shared_scripts {
