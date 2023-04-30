@@ -139,7 +139,7 @@ local function pickupCarcass(entity)
     end
 end
 
-exports.ox_target:addModel(animals, {
+exports.ox_target:addModel(, {
     {
         icon = "fa-solid fa-paw",
         label = locale('pickup_carcass'),
