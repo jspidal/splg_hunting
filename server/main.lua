@@ -47,15 +47,15 @@ local function isPlayerFarming(source, coords)
     return false
 end
 
-local function getCarcassGrade(weapon, carcassModel, bone, item)
+local function getCarcassGrade(weapon, bone, carcass)
     local grade = '★☆☆'
-    local image =  item..1
+    local image =  carcass.item..1
     if arrayContains(Config.GoodWeapon, weapon) then
         grade = '★★☆'
-        image =  item..2
-        if arrayContains(Config.HeadshotBones[carcassModel], bone) then
+        image =  carcass.item..2
+        if arrayContains(carcass.headshotBones, bone) then
             grade = '★★★'
-            image =  item..3
+            image =  carcass.item..3
         end
     end
 
@@ -80,10 +80,10 @@ RegisterNetEvent('mana_hunting:harvestCarcass',function (entityId, bone)
     end
     local weapon = GetPedCauseOfDeath(entity)
     local carcassModel = GetEntityModel(entity)
-    local item = Config.CarcassPos[carcassModel].item
-    local grade, image = getCarcassGrade(weapon, carcassModel, bone, item)
-    if exports.ox_inventory:CanCarryItem(source, item, 1) and DoesEntityExist(entity) and GetEntityAttachedTo(entity) == 0 then
-        exports.ox_inventory:AddItem(source, item, 1, {type = grade, image =  image})
+    local carcass = Config.Carcass[carcassModel]
+    local grade, image = getCarcassGrade(weapon, bone, carcass)
+    if exports.ox_inventory:CanCarryItem(source, carcass.item, 1) and DoesEntityExist(entity) and GetEntityAttachedTo(entity) == 0 then
+        exports.ox_inventory:AddItem(source, carcass.item, 1, {type = grade, image =  image})
         DeleteEntity(entity)
     end
 end)

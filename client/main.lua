@@ -5,7 +5,7 @@ local heaviestCarcass = 0
 local animals = {}
 local listItemCarcass = {}
 local carcassByItem = {}
-for key, value in pairs(Config.CarcassPos) do
+for key, value in pairs(Config.Carcass) do
     animals[#animals+1] = key
     listItemCarcass[#listItemCarcass+1] = value.item
     carcassByItem[value] = key
@@ -31,7 +31,7 @@ local function customControl()
             end
             Wait(7)
             if heaviestCarcass ~= 0 then
-                enable = Config.CarcassPos[heaviestCarcass].drag
+                enable = Config.Carcass[heaviestCarcass].drag
             else
                 enable = false
             end
@@ -47,7 +47,7 @@ local function playCarryAnim()
         ClearPedSecondaryTask(cache.ped)
         return
     end
-    if Config.CarcassPos[heaviestCarcass].drag then
+    if Config.Carcass[heaviestCarcass].drag then
         lib.requestAnimDict('combat@drag_ped@')
         TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false, false)
         customControl()
@@ -94,8 +94,8 @@ local function carryCarcass()
         carriedCarcass = CreatePed(1, heaviestCarcass, GetEntityCoords(cache.ped), GetEntityHeading(cache.ped), true, true)
         SetEntityInvincible(carriedCarcass, true)
         SetEntityHealth(carriedCarcass, 0)
-        local pos = Config.CarcassPos[heaviestCarcass]
-        AttachEntityToEntity(carriedCarcass, cache.ped,11816, pos.xPos, pos.yPos, pos.zPos, pos.xRot, pos.yRot, pos.zRot, false, false, false, true, 2, true)
+        local pos = Config.Carcass[heaviestCarcass]
+        AttachEntityToEntity(carriedCarcass, cache.ped, 11816, pos.xPos, pos.yPos, pos.zPos, pos.xRot, pos.yRot, pos.zRot, false, false, false, true, 2, true)
         playCarryAnim()
     else
         DeleteEntity(carriedCarcass)
@@ -139,7 +139,7 @@ local function pickupCarcass(entity)
     end
 end
 
-exports.ox_target:addModel(, {
+exports.ox_target:addModel(animals, {
     {
         icon = "fa-solid fa-paw",
         label = locale('pickup_carcass'),
@@ -171,7 +171,7 @@ local function sellCarcass()
             mouse = false
         },
     }) then
-        TriggerServerEvent('mana_hunting:SellCarcass', Config.CarcassPos[heaviestCarcass].item)
+        TriggerServerEvent('mana_hunting:SellCarcass', Config.Carcass[heaviestCarcass].item)
     end
 end
 
