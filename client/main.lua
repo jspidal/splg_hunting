@@ -113,7 +113,8 @@ RegisterNetEvent('esx:playerLoaded',function ()
     carryCarcass()
 end)
 
-local function pickupCarcass(entity)
+local function pickupCarcass(data)
+    local entity = data.entity
     TriggerEvent('ox_inventory:disarm')
     local _, bone = GetPedLastDamageBone(entity)
     TaskTurnPedToFaceEntity(cache.ped, entity, -1)
