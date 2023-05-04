@@ -8,7 +8,7 @@ local carcassByItem = {}
 for key, value in pairs(Config.Carcass) do
     animals[#animals+1] = key
     listItemCarcass[#listItemCarcass+1] = value.item
-    carcassByItem[value] = key
+    carcassByItem[value.item] = key
 end
 
 local function customControl()
