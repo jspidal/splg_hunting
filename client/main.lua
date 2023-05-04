@@ -159,46 +159,49 @@ end)
 
 --------------------- SELL -----------------------------------
 
-local function sellCarcass()
-    if lib.progressCircle({
-        duration = 3000,
-        label = locale('sell_in_progress'),
-        useWhileDead = false,
-        canCancel = true,
-        disable = {
-            move = true,
-            car = true,
-            combat = true,
-            mouse = false
-        },
-    }) then
-        TriggerServerEvent('mana_hunting:SellCarcass', Config.Carcass[heaviestCarcass].item)
+if Config.EnableSelling then
+
+    local function sellCarcass()
+        if lib.progressCircle({
+            duration = 3000,
+            label = locale('sell_in_progress'),
+            useWhileDead = false,
+            canCancel = true,
+            disable = {
+                move = true,
+                car = true,
+                combat = true,
+                mouse = false
+            },
+        }) then
+            TriggerServerEvent('mana_hunting:SellCarcass', Config.Carcass[heaviestCarcass].item)
+        end
     end
-end
 
-exports.ox_target:addBoxZone({
-    coords = vec3(963.34, -2115.39, 31.47),
-    size = vec3(6.8, 1, 3),
-    rotation = 355,
-    options = {
-        {
-            onSelect = sellCarcass,
-            icon = "fa-solid fa-sack-dollar",
-            label = locale('sell_carcass'),
-            canInteract = function()
-                return heaviestCarcass ~= 0
-            end
+    exports.ox_target:addBoxZone({
+        coords = vec3(963.34, -2115.39, 31.47),
+        size = vec3(6.8, 1, 3),
+        rotation = 355,
+        options = {
+            {
+                onSelect = sellCarcass,
+                icon = "fa-solid fa-sack-dollar",
+                label = locale('sell_carcass'),
+                canInteract = function()
+                    return heaviestCarcass ~= 0
+                end
+            }
         }
-    }
-})
+    })
 
-CreateThread(function()
-    blip = AddBlipForCoord(963.34, -2115.39)
-	SetBlipSprite(blip, 141)
-	SetBlipScale(blip, 0.8)
-	SetBlipColour(blip, 43)
-	SetBlipAsShortRange(blip, true)
-	BeginTextCommandSetBlipName('STRING')
-	AddTextComponentString(locale('blip_name'))
-	EndTextCommandSetBlipName(blip)
-end)
+    CreateThread(function()
+        blip = AddBlipForCoord(963.34, -2115.39)
+        SetBlipSprite(blip, 141)
+        SetBlipScale(blip, 0.8)
+        SetBlipColour(blip, 43)
+        SetBlipAsShortRange(blip, true)
+        BeginTextCommandSetBlipName('STRING')
+        AddTextComponentString(locale('blip_name'))
+        EndTextCommandSetBlipName(blip)
+    end)
+end

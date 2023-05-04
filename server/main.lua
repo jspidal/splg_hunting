@@ -88,26 +88,28 @@ RegisterNetEvent('mana_hunting:harvestCarcass',function (entityId, bone)
     end
 end)
 
-RegisterNetEvent('mana_hunting:SellCarcass',function (item)
-    local itemData = exports.ox_inventory:Search(source, 'slots', item)[1]
-    if itemData.count < 1 then return end
+if Config.EnableSelling then
+    RegisterNetEvent('mana_hunting:SellCarcass',function (item)
+        local itemData = exports.ox_inventory:Search(source, 'slots', item)[1]
+        if itemData.count < 1 then return end
 
-    local reward = Config.SellPrice[item].max * Config.GradeMultiplier[itemData.metadata.type]
-    if Config.Degrade and itemData.metadata.durability then
-        local currentTime = os.time()
-        local maxTime = itemData.metadata.durability
-        local minTime = maxTime - itemData.metadata.degrade * 60
-        if currentTime >= maxTime then
-            currentTime = maxTime
+        local reward = Config.SellPrice[item].max * Config.GradeMultiplier[itemData.metadata.type]
+        if Config.Degrade and itemData.metadata.durability then
+            local currentTime = os.time()
+            local maxTime = itemData.metadata.durability
+            local minTime = maxTime - itemData.metadata.degrade * 60
+            if currentTime >= maxTime then
+                currentTime = maxTime
+            end
+            reward = math.floor(
+                map(
+                    currentTime,
+                    maxTime,
+                    minTime,
+                    Config.SellPrice[item].min * Config.GradeMultiplier[itemData.metadata.type],
+                    Config.SellPrice[item].max * Config.GradeMultiplier[itemData.metadata.type]))
         end
-        reward = math.floor(
-            map(
-                currentTime,
-                maxTime,
-                minTime,
-                Config.SellPrice[item].min * Config.GradeMultiplier[itemData.metadata.type],
-                Config.SellPrice[item].max * Config.GradeMultiplier[itemData.metadata.type]))
-    end
-    exports.ox_inventory:RemoveItem(source, item, 1, nil, itemData.slot)
-    exports.ox_inventory:AddItem(source, 'money', reward)
-end)
+        exports.ox_inventory:RemoveItem(source, item, 1, nil, itemData.slot)
+        exports.ox_inventory:AddItem(source, 'money', reward)
+    end)
+end

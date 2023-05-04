@@ -62,3 +62,5 @@ Config.AntiFarm = {
     maxAmount = 3,
     personal = true
 }
+
+Config.EnableSelling = false
