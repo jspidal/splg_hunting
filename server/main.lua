@@ -2,18 +2,9 @@ lib.locale()
 local antifarm = {}
 
 lib.versionCheck('manason/mana_hunting')
-if not lib.checkDependency('ox_lib', '3.2.1') then error() end
-if not lib.checkDependency('ox_inventory', '2.28.0') then error() end
-if not lib.checkDependency('ox_target', '1.8.0') then error() end
-
-local function arrayContains(array, value)
-    for i = 1, #array, 1 do
-        if array[i] == value then
-            return true
-        end
-    end
-    return false
-end
+assert(lib.checkDependency('ox_lib', '3.21.0', true))
+assert(lib.checkDependency('ox_inventory', '2.28.0', true))
+assert(lib.checkDependency('ox_target', '1.8.0'), true)
 
 local function isPlayerFarming(source, coords)
     if Config.AntiFarm.enable == false then return false end
@@ -50,10 +41,10 @@ end
 local function getCarcassGrade(weapon, bone, carcass)
     local grade = '★☆☆'
     local image =  carcass.item..1
-    if arrayContains(Config.GoodWeapon, weapon) then
+    if lib.table.contains(Config.GoodWeapon, weapon) then
         grade = '★★☆'
         image =  carcass.item..2
-        if arrayContains(carcass.headshotBones, bone) then
+        if lib.table.contains(carcass.headshotBones, bone) then
             grade = '★★★'
             image =  carcass.item..3
         end

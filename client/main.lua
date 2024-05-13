@@ -43,10 +43,6 @@ local function customControl()
 end
 
 local function playCarryAnim()
-    if carriedCarcass == 0 then
-        ClearPedSecondaryTask(cache.ped)
-        return
-    end
     if Config.Carcass[heaviestCarcass].drag then
         lib.requestAnimDict('combat@drag_ped@')
         TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false, false)
@@ -58,6 +54,7 @@ local function playCarryAnim()
             end
             Wait(500)
         end
+        RemoveAnimDict('combat@drag_ped@')
     else
         lib.requestAnimDict('missfinale_c2mcs_1')
         TaskPlayAnim(cache.ped, 'missfinale_c2mcs_1', 'fin_c2_mcs_1_camman', 8.0, -8.0, 100000, 49, 0, false, false, false)
@@ -68,6 +65,7 @@ local function playCarryAnim()
             end
             Wait(500)
         end
+        RemoveAnimDict('missfinale_c2mcs_1')
     end
 end
 
@@ -100,7 +98,7 @@ local function carryCarcass()
     else
         DeleteEntity(carriedCarcass)
         carriedCarcass = 0
-        playCarryAnim()
+        ClearPedSecondaryTask(cache.ped)
     end
 end
 
@@ -110,6 +108,9 @@ RegisterNetEvent('ox:playerLoaded', function()
     carryCarcass()
 end)
 RegisterNetEvent('esx:playerLoaded',function ()
+    carryCarcass()
+end)
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     carryCarcass()
 end)
 
@@ -150,12 +151,6 @@ exports.ox_target:addModel(animals, {
         onSelect = pickupCarcass
     }
 })
-
-RegisterCommand('carcass', function ()
-    lib.requestAnimDict('amb@medic@standing@kneel@idle_a')
-    TaskPlayAnim(cache.ped, 'amb@medic@standing@kneel@idle_a', 'idle_a', 8.0, -8.0, 10000, 1, 0, false, false, false)
-end)
-
 
 --------------------- SELL -----------------------------------
 
