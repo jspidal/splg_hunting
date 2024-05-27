@@ -11,6 +11,8 @@ for key, value in pairs(Config.Carcass) do
     carcassByItem[value.item] = key
 end
 
+local idle = true
+
 local function customControl()
     Citizen.CreateThread(function()
         local playerPed = cache.ped
@@ -18,18 +20,24 @@ local function customControl()
 
         while enable do
             if IsControlPressed(0, 35) then -- Right
+                idle = false
                 FreezeEntityPosition(playerPed, false)
                 SetEntityHeading(playerPed, GetEntityHeading(playerPed)+0.5)
+                Wait(7)
             elseif IsControlPressed(0, 34) then -- Left
+                idle = false
                 FreezeEntityPosition(playerPed, false)
                 SetEntityHeading(playerPed, GetEntityHeading(playerPed)-0.5)
+                Wait(7)
             elseif IsControlPressed(0, 32) or IsControlPressed(0, 33) then
+                idle = false
                 FreezeEntityPosition(playerPed, false)
+                Wait(7)
             else
+                idle = true
                 FreezeEntityPosition(playerPed, true)
-                TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 0.0, 0.0, 1, 2, 7, false, false, false)
+                Wait(0)
             end
-            Wait(7)
             if heaviestCarcass ~= 0 then
                 enable = Config.Carcass[heaviestCarcass].drag
             else
@@ -48,11 +56,16 @@ local function playCarryAnim()
         TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false, false)
         customControl()
         while carriedCarcass ~= 0 do
-            while not IsEntityPlayingAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 1) do
-                TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false, false)
-                Wait(0)
+            if idle then
+                if not IsEntityPlayingAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2) then
+                    TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 0.0, 0.0, 1, 2, 7, false, false, false)
+                end
+            else
+                if not IsEntityPlayingAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 1) then
+                    TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false, false)
+                end
             end
-            Wait(500)
+            Wait(0)
         end
         RemoveAnimDict('combat@drag_ped@')
     else
@@ -70,36 +83,38 @@ local function playCarryAnim()
 end
 
 local function carryCarcass()
-    TriggerEvent('ox_inventory:disarm')
-    FreezeEntityPosition(cache.ped, false)
-    heaviestCarcass = 0
-    local carcassCount = 0
-    for _, value in pairs(exports.ox_inventory:Search('count', listItemCarcass)) do
-        carcassCount += value
-    end
-    if carcassCount > 0 then
-        local inventory = exports.ox_inventory:Search('slots', listItemCarcass)
-        local weight = 0
-        for key, value in pairs(inventory) do
-            if next(value) ~= nil and value[1].weight > weight then
-                weight = value[1].weight
-                heaviestCarcass = carcassByItem[key]
-            end
+    CreateThread(function()
+        TriggerEvent('ox_inventory:disarm')
+        FreezeEntityPosition(cache.ped, false)
+        heaviestCarcass = 0
+        local carcassCount = 0
+        for _, value in pairs(exports.ox_inventory:Search('count', listItemCarcass)) do
+            carcassCount += value
         end
+        if carcassCount > 0 then
+            local inventory = exports.ox_inventory:Search('slots', listItemCarcass)
+            local weight = 0
+            for key, value in pairs(inventory) do
+                if next(value) ~= nil and value[1].weight > weight then
+                    weight = value[1].weight
+                    heaviestCarcass = carcassByItem[key]
+                end
+            end
 
-        lib.requestModel(heaviestCarcass)
-        DeleteEntity(carriedCarcass)
-        carriedCarcass = CreatePed(1, heaviestCarcass, GetEntityCoords(cache.ped), GetEntityHeading(cache.ped), true, true)
-        SetEntityInvincible(carriedCarcass, true)
-        SetEntityHealth(carriedCarcass, 0)
-        local pos = Config.Carcass[heaviestCarcass]
-        AttachEntityToEntity(carriedCarcass, cache.ped, 11816, pos.xPos, pos.yPos, pos.zPos, pos.xRot, pos.yRot, pos.zRot, false, false, false, true, 2, true)
-        playCarryAnim()
-    else
-        DeleteEntity(carriedCarcass)
-        carriedCarcass = 0
-        ClearPedSecondaryTask(cache.ped)
-    end
+            lib.requestModel(heaviestCarcass)
+            DeleteEntity(carriedCarcass)
+            carriedCarcass = CreatePed(1, heaviestCarcass, GetEntityCoords(cache.ped), GetEntityHeading(cache.ped), true, true)
+            SetEntityInvincible(carriedCarcass, true)
+            SetEntityHealth(carriedCarcass, 0)
+            local pos = Config.Carcass[heaviestCarcass]
+            AttachEntityToEntity(carriedCarcass, cache.ped, 11816, pos.xPos, pos.yPos, pos.zPos, pos.xRot, pos.yRot, pos.zRot, false, false, false, true, 2, true)
+            playCarryAnim()
+        else
+            DeleteEntity(carriedCarcass)
+            carriedCarcass = 0
+            ClearPedSecondaryTask(cache.ped)
+        end
+    end)
 end
 
 exports('CarryCarcass', carryCarcass)

@@ -11,7 +11,6 @@ dependencies {
 	'/server:5181',
 	'/onesync',
 	'ox_lib',
-	'ox_inventory',
 	'ox_target',
 }
 
