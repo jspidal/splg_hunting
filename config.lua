@@ -1,6 +1,6 @@
 Config = {}
 
----@alias CarcassItem 'carcass_boar'|'carcass_hawk'|'carcass_cormorant'|'carcass_coyote'|'carcass_deer'|'carcass_mtlion'|'carcass_rabbit'
+---@alias CarcassItem 'carcass_boar' | 'carcass_hawk'|'carcass_cormorant'|'carcass_coyote'|'carcass_deer'|'carcass_mtlion'|'carcass_rabbit'
 
 ---@class CarcassEntity
 ---@field item CarcassItem
@@ -27,7 +27,7 @@ Config.Carcass  = {
 ---@type number[] hash codes of weapons that lead to higher grade carcasses.
 Config.GoodWeapon = {
 ---@diagnostic disable-next-line: assign-type-mismatch
-    `WEAPON_SNIPERRIFLE`,`WEAPON_KNIFE`
+    `WEAPON_SNIPERRIFLE`, `WEAPON_KNIFE`
 }
 
 ---@type table<CarcassItem, {min: number, max: number}> min and max sell prices per carcass based on durability
@@ -64,3 +64,77 @@ Config.AntiFarm = {
 }
 
 Config.EnableSelling = false
+
+---@class Task
+---@field title string
+---@field description string
+---@field cashReward number
+---@field xpReward number
+---@field requirements table<string, number>
+
+---@type Task[]
+Config.Tasks = {
+    {
+        title = 'Hunting 101',
+        description = 'Kill a boar and sell its carcass to the butcher',
+        cashReward = 100,
+        xpReward = 1,
+        requirements = {
+            ['carcass_boar'] = 1
+        }
+    },
+    {
+        title = 'Birdwatching',
+        description = 'Kill a hawk and sell its carcass to the butcher',
+        cashReward = 150,
+        xpReward = 1,
+        requirements = {
+            ['carcass_hawk'] = 1
+        }
+    },
+    {
+        title = 'Fishing for compliments',
+        description = 'Kill a cormorant and sell its carcass to the butcher',
+        cashReward = 100,
+        xpReward = 1,
+        requirements = {
+            ['carcass_cormorant'] = 1
+        }
+    },
+    {
+        title = 'Coyote Ugly',
+        description = 'Kill a coyote and sell its carcass to the butcher',
+        cashReward = 100,
+        xpReward = 1,
+        requirements = {
+            ['carcass_coyote'] = 1
+        }
+    },
+    {
+        title = 'Deer Hunter',
+        description = 'Kill a deer and sell its carcass to the butcher',
+        cashReward = 200,
+        xpReward = 1,
+        requirements = {
+            ['carcass_deer'] = 1
+        }
+    },
+    {
+        title = 'Mountain Lion',
+        description = 'Kill a mountain lion and sell its carcass to the butcher',
+        cashReward = 250,
+        xpReward = 1,
+        requirements = {
+            ['carcass_mtlion'] = 1
+        }
+    },
+    {
+        title = 'Rabbit Season',
+        description = 'Kill a rabbit and sell its carcass to the butcher',
+        cashReward = 50,
+        xpReward = 1,
+        requirements = {
+            ['carcass_rabbit'] = 1
+        }
+    }
+}

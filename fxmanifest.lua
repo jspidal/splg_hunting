@@ -14,6 +14,8 @@ dependencies {
 	'ox_target',
 }
 
+ui_page 'build/index.html'
+
 shared_scripts {
 	'@ox_lib/init.lua',
 	'config.lua'
@@ -28,5 +30,6 @@ server_scripts {
 }
 
 files {
-    'locales/*.json'
+    'locales/*.json',
+	'build/**',
 }

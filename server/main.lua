@@ -6,6 +6,8 @@ assert(lib.checkDependency('ox_lib', '3.21.0', true))
 assert(lib.checkDependency('ox_inventory', '2.28.0', true))
 assert(lib.checkDependency('ox_target', '1.8.0'), true)
 
+exports.pickle_xp:RegisterXPCategory('hunting', "Hunting", 1000, 0.5, 5)
+
 local function isPlayerFarming(source, coords)
     if Config.AntiFarm.enable == false then return false end
     if Config.AntiFarm.personal == false then
