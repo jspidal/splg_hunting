@@ -3,6 +3,7 @@
     export let description: string;
     export let cashReward: number;
     export let xpReward: number;
+    export let canClaim: boolean;
 </script>
 
 <div class="flex flex-col card variant-soft-surface overflow-hidden">
@@ -13,7 +14,7 @@
             <h4 class="h4 text-success-600">{xpReward}XP</h4>
         </span>
     </header>
-    <section class="flex flex-col flex-initial">
+    <section class="flex flex-col justify-center pb-4">
         <h3 class="h3"> Requirements: </h3>
         <ul class="list">
             <li>
@@ -25,4 +26,7 @@
         </ul>
         {description}
     </section>
+    <footer class="card-footer ml-auto">
+        <button class="btn variant-soft-primary" disabled={canClaim}>Complete</button>
+    </footer>
 </div>
