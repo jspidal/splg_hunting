@@ -6,7 +6,7 @@
     import { path } from 'elegua';
 
     $: classesActive = (href: string) => {
-        return $path === href ? 'variant-soft' : '' };
+        return $path === href ? 'variant-soft-primary' : '' };
 </script>
 
 <div class="flex flex-auto justify-center items-center h-screen">
