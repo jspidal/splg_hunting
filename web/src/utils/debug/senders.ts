@@ -1,5 +1,6 @@
 import { DebugItem } from '@typings/events'
 import { toggleVisible } from './visibility'
+import { toggleButtonsVisible } from './taskButtons'
 import { Send } from '@enums/events'
 import { DebugEventSend, SendEvent } from '@utils/eventsHandlers'
 
@@ -17,6 +18,19 @@ const SendDebuggers: DebugItem[] = [
             {
                 label: 'False',
                 action: () => toggleVisible(false),
+            },
+        ],
+    },
+    {
+        label: 'Toggle Task Buttons',
+        actions: [
+            {
+                label: 'True',
+                action: () => toggleButtonsVisible(true),
+            },
+            {
+                label: 'False',
+                action: () => toggleButtonsVisible(false),
             },
         ],
     },

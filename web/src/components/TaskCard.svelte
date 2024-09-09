@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { TASK_BUTTONS_VISIBLE } from "@stores/stores"
     export let title: string;
     export let description: string;
     export let cashReward: number;
@@ -6,7 +7,7 @@
     export let canClaim: boolean;
 </script>
 
-<div class="flex flex-col card variant-soft-surface overflow-hidden">
+<div class="flex flex-col card variant-soft-surface">
     <header class="card-header flex flex-row place-content-center">
         <h2 class="h2">{title}</h2>
         <span class="ml-auto">
@@ -14,7 +15,7 @@
             <h4 class="h4 text-success-600">{xpReward}XP</h4>
         </span>
     </header>
-    <section class="flex flex-col justify-center pb-4">
+    <section class="py-4 pl-4 place-self-start">
         <h3 class="h3"> Requirements: </h3>
         <ul class="list">
             <li>
@@ -26,7 +27,9 @@
         </ul>
         {description}
     </section>
+    {#if $TASK_BUTTONS_VISIBLE}
     <footer class="card-footer ml-auto">
         <button class="btn variant-soft-primary" disabled={canClaim}>Complete</button>
     </footer>
+    {/if}
 </div>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import DebugImage from '@utils/debug/DebugImage.svelte';
-import { InitialiseDebugSenders } from '@utils/debug/init';
+    import { InitialiseDebugSenders } from '@utils/debug/init';
     import { InitialiseDebugReceivers } from '@utils/debug/receivers';
     import SendDebuggers from '@utils/debug/senders';
     import { onMount } from 'svelte';

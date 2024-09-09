@@ -32,3 +32,10 @@ export const IS_BROWSER = writable<boolean>(!(window as any).invokeNative);
  * @type {Writable<boolean>}
  */
 export const VISIBLE = writable<boolean>(false);
+
+
+/**
+ * Whether the debug menu is visible or not.
+ * @type {Writable<boolean>}
+ */
+export const TASK_BUTTONS_VISIBLE = writable<boolean>(true);
