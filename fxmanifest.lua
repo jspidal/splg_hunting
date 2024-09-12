@@ -18,7 +18,6 @@ ui_page 'build/index.html'
 
 shared_scripts {
 	'@ox_lib/init.lua',
-	'config.lua'
 }
 
 client_scripts {
@@ -32,4 +31,5 @@ server_scripts {
 files {
     'locales/*.json',
 	'build/**',
+	'config/*.lua',
 }

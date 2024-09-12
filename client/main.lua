@@ -5,6 +5,8 @@ local heaviestCarcass = 0
 local animals = {}
 local listItemCarcass = {}
 local carcassByItem = {}
+
+local Config = require 'config.shared'
 for key, value in pairs(Config.Carcass) do
     animals[#animals+1] = key
     listItemCarcass[#listItemCarcass+1] = value.item

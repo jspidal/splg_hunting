@@ -1,6 +1,10 @@
 lib.locale()
 local antifarm = {}
 
+local SharedConfig = require 'config.shared'
+
+local ServerConfig = require 'config.server'
+
 lib.versionCheck('manason/mana_hunting')
 assert(lib.checkDependency('ox_lib', '3.21.0', true))
 assert(lib.checkDependency('ox_inventory', '2.28.0', true))
@@ -9,8 +13,8 @@ assert(lib.checkDependency('ox_target', '1.8.0'), true)
 exports.pickle_xp:RegisterXPCategory('hunting', "Hunting", 1000, 0.5, 5)
 
 local function isPlayerFarming(source, coords)
-    if Config.AntiFarm.enable == false then return false end
-    if Config.AntiFarm.personal == false then
+    if ServerConfig.AntiFarm.enable == false then return false end
+    if ServerConfig.AntiFarm.personal == false then
         source = 1
     end
 
@@ -25,10 +29,10 @@ local function isPlayerFarming(source, coords)
         return false
     end
     for i = 1, #playerData do
-        if (curentTime - playerData[i].time) > Config.AntiFarm.time then -- delete old table
+        if (curentTime - playerData[i].time) > ServerConfig.AntiFarm.time then -- delete old table
             playerData[i] = nil
-        elseif #(playerData[i].coords - coords) < Config.AntiFarm.size then -- if found table in coord
-            if playerData[i].amount >= Config.AntiFarm.maxAmount then -- if amount more than max
+        elseif #(playerData[i].coords - coords) < ServerConfig.AntiFarm.size then -- if found table in coord
+            if playerData[i].amount >= ServerConfig.AntiFarm.maxAmount then -- if amount more than max
                 return true
             end
             playerData[i].amount += 1 -- if not amount more than max
@@ -43,7 +47,7 @@ end
 local function getCarcassGrade(weapon, bone, carcass)
     local grade = '★☆☆'
     local image =  carcass.item..1
-    if lib.table.contains(Config.GoodWeapon, weapon) then
+    if lib.table.contains(ServerConfig.GoodWeapon, weapon) then
         grade = '★★☆'
         image =  carcass.item..2
         if lib.table.contains(carcass.headshotBones, bone) then
@@ -73,7 +77,7 @@ RegisterNetEvent('mana_hunting:harvestCarcass',function (entityId, bone)
     end
     local weapon = GetPedCauseOfDeath(entity)
     local carcassModel = GetEntityModel(entity)
-    local carcass = Config.Carcass[carcassModel]
+    local carcass = SharedConfig.Carcass[carcassModel]
     local grade, image = getCarcassGrade(weapon, bone, carcass)
     if exports.ox_inventory:CanCarryItem(source, carcass.item, 1) and DoesEntityExist(entity) and GetEntityAttachedTo(entity) == 0 then
         exports.ox_inventory:AddItem(source, carcass.item, 1, {type = grade, image =  image})
@@ -81,13 +85,13 @@ RegisterNetEvent('mana_hunting:harvestCarcass',function (entityId, bone)
     end
 end)
 
-if Config.EnableSelling then
+if SharedConfig.EnableSelling then
     RegisterNetEvent('mana_hunting:SellCarcass',function (item)
         local itemData = exports.ox_inventory:Search(source, 'slots', item)[1]
         if itemData.count < 1 then return end
 
-        local reward = Config.SellPrice[item].max * Config.GradeMultiplier[itemData.metadata.type]
-        if Config.Degrade and itemData.metadata.durability then
+        local reward = ServerConfig.SellPrice[item].max * ServerConfig.GradeMultiplier[itemData.metadata.type]
+        if ServerConfig.Degrade and itemData.metadata.durability then
             local currentTime = os.time()
             local maxTime = itemData.metadata.durability
             local minTime = maxTime - itemData.metadata.degrade * 60
@@ -99,8 +103,8 @@ if Config.EnableSelling then
                     currentTime,
                     maxTime,
                     minTime,
-                    Config.SellPrice[item].min * Config.GradeMultiplier[itemData.metadata.type],
-                    Config.SellPrice[item].max * Config.GradeMultiplier[itemData.metadata.type]))
+                    ServerConfig.SellPrice[item].min * ServerConfig.GradeMultiplier[itemData.metadata.type],
+                    ServerConfig.SellPrice[item].max * ServerConfig.GradeMultiplier[itemData.metadata.type]))
         end
         exports.ox_inventory:RemoveItem(source, item, 1, nil, itemData.slot)
         exports.ox_inventory:AddItem(source, 'money', reward)
