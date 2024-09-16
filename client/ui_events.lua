@@ -4,4 +4,6 @@ Send = {
 
 Receive = {
     close = "splg_hunting:close",
+    claimTask = "splg_hunting:claimTask",
+    requestTasks = "splg_hunting:requestTasks",
 }

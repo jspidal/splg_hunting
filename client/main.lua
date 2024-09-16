@@ -223,3 +223,14 @@ RegisterNUICallback(Receive.close, function(_, cb)
     SendNUIEvent(Send.visible, false)
     cb(1)
 end)
+
+RegisterNUICallback(Receive.claimTask, function(data, cb)
+    -- Claim task logic
+    print(json.encode(data))
+    cb(1)
+end)
+
+RegisterNUICallback(Receive.requestTasks, function(_, cb)
+    -- Request tasks logic
+    cb(1)
+end)
