@@ -15,9 +15,9 @@
 
     InitialiseListen();
 
-    ReceiveEvent(Receive.taskButtons, (visible: boolean): void => {
-        $TASK_BUTTONS_VISIBLE = visible;
-    });
+    // ReceiveEvent(Receive.taskButtons, (visible: boolean): void => {
+    //     $TASK_BUTTONS_VISIBLE = visible;
+    // });
 </script>
 
 <Visibility>
