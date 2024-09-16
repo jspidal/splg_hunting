@@ -40,4 +40,11 @@ ServerConfig.AntiFarm = {
     personal = true
 }
 
+---Function is triggered when a player earns experience.
+---@param src number
+---@param exp number
+ServerConfig.addExperience = function(src, exp)
+    
+end
+
 return ServerConfig
