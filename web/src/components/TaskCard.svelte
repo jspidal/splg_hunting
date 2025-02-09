@@ -7,6 +7,7 @@
     export let cashReward: number;
     export let xpReward: number;
     export let canClaim: boolean;
+    export let requirements: string[] = [];
 
     function handleTaskButtonClick() {
         SendEvent(Send.claimTask, taskId);
@@ -23,15 +24,17 @@
         </span>
     </header>
     <section class="py-4 pl-4 place-self-start">
+        {#if requirements.length > 0}
         <h3 class="h3"> Requirements: </h3>
         <ul class="list">
-            <li>
-                <span>Testing</span>
-            </li>
-            <li>
-                <span>Testing 2</span>
-            </li>
+            {#each requirements as requirement}
+                <li>
+                    <span>&#x2022</span>
+                    <span class="flex-auto">{requirement}</span>
+                </li>
+            {/each}
         </ul>
+        {/if}
     </section>
     {#if $TASK_BUTTONS_VISIBLE}
     <footer class="card-footer ml-auto">

@@ -24,7 +24,7 @@
             <h2 class="h2">Available Tasks</h2>
             <div class="m-8 mt-12 flex flex-row flex-wrap gap-8 justify-center">
                 {#each tasks as task}
-                    <TaskCard taskId={task.id} title={task.title} cashReward={task.cashReward} xpReward={task.xpReward} canClaim={task.canClaim}/>
+                    <TaskCard taskId={task.id} title={task.title} cashReward={task.cashReward} xpReward={task.xpReward} canClaim={task.canClaim} requirements={task.requirements}/>
                 {/each}
             </div>
         {/await}

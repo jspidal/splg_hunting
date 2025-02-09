@@ -9,4 +9,5 @@ export interface Task {
     cashReward: number;
     xpReward: number;
     canClaim: boolean;
+    requirements: string[];
 }
