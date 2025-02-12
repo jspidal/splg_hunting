@@ -26,76 +26,106 @@ Config.Carcass = {
 
 Config.EnableSelling = false
 
----@class Task
+---@class TaskCondition
+---@field amount integer the required number of aniamls to complete the task
+---@field weapon? string | integer the hash of the required weapon to kill the animal
+---@field quality? number the required quality of the carcass
+---@field headshot? boolean whether the animal was headshot
+---@field minDistance? number the minimum distance from the player to the carcass
+---@field maxDistance? number the maximum distance from the player to the carcass
+
+---@class ConfigTask
+---@field id number
 ---@field title string
 ---@field description string
 ---@field cashReward number
 ---@field xpReward number
----@field requirements table<string, number>
+---@field requirements table<CarcassItem, TaskCondition>
 
----@type Task[]
+---@type ConfigTask[]
 Config.Tasks = {
     {
+        id = 1,
         title = 'Hunting 101',
-        description = 'Kill a boar and sell its carcass to the butcher',
+        description = 'Kill a boar and collect it\'s carcass',
         cashReward = 100,
         xpReward = 1,
         requirements = {
-            ['carcass_boar'] = 1
+            ['carcass_boar'] = {
+                amount = 1,
+            }
         }
     },
     {
+        id = 2,
         title = 'Birdwatching',
-        description = 'Kill a hawk and sell its carcass to the butcher',
+        description = 'Kill a hawk',
         cashReward = 150,
         xpReward = 1,
         requirements = {
-            ['carcass_hawk'] = 1
+            ['carcass_hawk'] = {
+                amount = 1
+            }
         }
     },
     {
+        id = 3,
         title = 'Fishing for compliments',
-        description = 'Kill a cormorant and sell its carcass to the butcher',
+        description = 'Kill a cormorant',
         cashReward = 100,
         xpReward = 1,
         requirements = {
-            ['carcass_cormorant'] = 1
+            ['carcass_cormorant'] = {
+                amount = 1
+            }
         }
     },
     {
+        id = 4,
         title = 'Coyote Ugly',
-        description = 'Kill a coyote and sell its carcass to the butcher',
+        description = 'Kill a coyote',
         cashReward = 100,
         xpReward = 1,
         requirements = {
-            ['carcass_coyote'] = 1
+            ['carcass_coyote'] = {
+                amount = 1
+            }
         }
     },
     {
+        id = 5,
         title = 'Deer Hunter',
-        description = 'Kill a deer and sell its carcass to the butcher',
+        description = 'Kill a deer',
         cashReward = 200,
         xpReward = 1,
         requirements = {
-            ['carcass_deer'] = 1
+            ['carcass_deer'] = {
+                amount = 1
+            }
         }
     },
     {
+        id = 6,
         title = 'Mountain Lion',
-        description = 'Kill a mountain lion and sell its carcass to the butcher',
+        description = 'Kill a mountain lion',
         cashReward = 250,
         xpReward = 1,
         requirements = {
-            ['carcass_mtlion'] = 1
+            ['carcass_mtlion'] = {
+                amount = 1
+            }
         }
     },
     {
+        id = 7,
         title = 'Rabbit Season',
         description = 'Kill a rabbit and sell its carcass to the butcher',
         cashReward = 50,
         xpReward = 1,
         requirements = {
-            ['carcass_rabbit'] = 1
+            ['carcass_rabbit'] = {
+                amount = 1
+            }
         }
     }
 }
