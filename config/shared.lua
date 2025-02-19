@@ -40,7 +40,7 @@ Config.EnableSelling = false
 ---@field description string
 ---@field cashReward number
 ---@field xpReward number
----@field requirements table<CarcassItem, TaskCondition>
+---@field requirements table<CarcassItem | 'any', TaskCondition>
 
 ---@type ConfigTask[]
 Config.Tasks = {
