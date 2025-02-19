@@ -1,12 +1,10 @@
 <script lang="ts">
-    import { CONFIG, IS_BROWSER, TASK_BUTTONS_VISIBLE } from './stores/stores';
+    import { CONFIG, IS_BROWSER} from '@stores/stores';
     import { InitialiseListen } from '@utils/listeners';
     import Visibility from '@providers/Visibility.svelte';
     import HuntingUIBase from '@components/HuntingUIBase.svelte';
     import { path } from 'elegua';
     import HuntingHome from '@components/HuntingHome.svelte';
-    import { Receive } from '@enums/events';
-    import { ReceiveEvent } from '@utils/eventsHandlers';
     
     CONFIG.set({
         fallbackResourceName: 'splg_hunting',
@@ -14,10 +12,6 @@
     });
 
     InitialiseListen();
-
-    // ReceiveEvent(Receive.taskButtons, (visible: boolean): void => {
-    //     $TASK_BUTTONS_VISIBLE = visible;
-    // });
 </script>
 
 <Visibility>

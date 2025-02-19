@@ -11,3 +11,7 @@ export interface Task {
     canClaim: boolean;
     requirements: string[];
 }
+
+export interface DataEvent {
+    locale: string;
+}

@@ -5,5 +5,14 @@
     "sell_in_progress": "Sell in progress ...",
     "blip_name": "Carcass Sell",
     "too_far": "You are too far from the carcass",
-    "stop_farm": "Respect the biodiversity change of place"
+    "stop_farm": "Respect the biodiversity change of place",
+
+
+    "HOME_LABEL": "Home",
+    "PROFILE_LABEL": "Profile",
+    "HUNTING_LABEL": "Hunting",
+    "LOADING_LABEL": "Loading...",
+    "AVAILABLE_TASKS_LABEL": "Available Tasks",
+    "REQUIREMENTS_LABEL": "Requirements:",
+    "BUTTON_COMPLETE_LABEL": "Complete"
 }

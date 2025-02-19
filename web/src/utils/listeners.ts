@@ -1,12 +1,21 @@
 import { Receive } from "@enums/events"
 import { DebugEventCallback } from "@typings/events"
 import { ReceiveEvent } from "./eventsHandlers"
+import { LOCALE } from "@stores/ui"
 
 const AlwaysListened: DebugEventCallback[] = [
     {
         action: Receive.visible,
         handler: (data: string) => {
             console.log("This is always listened to because it is in the AlwaysListened array.")
+        }
+    },
+    {
+        action: Receive.data,
+        handler: (data: any) => {
+            if (data.locale) {
+                LOCALE.set(JSON.parse(data.locale))
+            }
         }
     }
 ]

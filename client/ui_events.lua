@@ -1,5 +1,6 @@
 Send = {
     visible = "splg_hunting:visible",
+    data = "splg_hunting:data",
 }
 
 Receive = {

@@ -1,6 +1,7 @@
 export enum Receive {
     visible = 'splg_hunting:visible',
     taskButtons = 'splg_hunting:taskButtons',
+    data = 'splg_hunting:data',
 }
 
 export enum Send {
