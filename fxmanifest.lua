@@ -2,10 +2,10 @@ fx_version 'cerulean'
 lua54 'yes'
 game 'gta5'
 
-name "mana_hunting"
-description "Hunting Script made for ox_inventory. Fork of nfire_hunting"
-author "Manason"
-version "2.0.0"
+name "splg_hunting"
+description "Hunting Script made for ox_inventory. Fork of mana_hunting"
+author "Spiderlogical"
+version "1.0.0"
 
 dependencies {
 	'/server:5181',
@@ -18,6 +18,7 @@ ui_page 'build/index.html'
 
 shared_scripts {
 	'@ox_lib/init.lua',
+	'bridge/init.lua'
 }
 
 client_scripts {
@@ -32,4 +33,5 @@ files {
     'locales/*.json',
 	'build/**',
 	'config/*.lua',
+	'bridge/**'
 }
