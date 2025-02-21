@@ -1,7 +1,9 @@
-# mana_hunting
-Fivem Hunting script made for ox_inventory. Forked from nfire_hunting
+# **This resource is heavily WIP and new features being added currently do not function as intended**
 
-Preview : https://youtu.be/1Fzb0yB0jn0
+# splg_hunting
+Fivem Hunting script made for ox_inventory. Forked from mana_hunting
+
+Preview: https://youtu.be/1Fzb0yB0jn0 (original preview video)
 ![image](https://user-images.githubusercontent.com/55892717/163342386-b07ff6ee-0316-4f18-a060-727fdc35afed.png)
 
 [original author Nfire's ko-fi](https://ko-fi.com/O4O87T3LC)
@@ -20,7 +22,12 @@ ox_lib : https://github.com/overextended/ox_lib/releases/latest
 
 ox_target : https://github.com/overextended/ox_target/releases/latest
 
-Item to add :
+## Frameworks:
+- [qbx_core](https://github.com/Qbox-project/qbx_core)
+
+- [ox_core](https://github.com/overextended/ox_core)
+
+## Items
 ```lua
 	['carcass_boar'] = {
 		label = 'Boar Carcass',
