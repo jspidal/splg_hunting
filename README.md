@@ -22,6 +22,8 @@ ox_lib : https://github.com/overextended/ox_lib/releases/latest
 
 ox_target : https://github.com/overextended/ox_target/releases/latest
 
+ox_mysql : https://github.com/overextended/oxmysql/releases/latest
+
 ## Frameworks:
 - [qbx_core](https://github.com/Qbox-project/qbx_core)
 
