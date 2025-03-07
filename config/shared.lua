@@ -1,5 +1,12 @@
 local Config = {}
 
+---@alias Framework 'qbx_core' | 'ox_core'
+--- Supported frameworks
+
+---@type Framework
+---Framework being used, must be one of the options listed above
+Config.Framework = 'qbx_core'
+
 ---@alias CarcassItem 'carcass_boar' | 'carcass_hawk'|'carcass_cormorant'|'carcass_coyote'|'carcass_deer'|'carcass_mtlion'|'carcass_rabbit'
 
 ---@class CarcassEntity
@@ -26,6 +33,7 @@ Config.Carcass = {
 
 Config.EnableSelling = false
 
+
 ---@class TaskCondition
 ---@field amount integer the required number of aniamls to complete the task
 ---@field weapon? string | integer the hash of the required weapon to kill the animal
@@ -35,9 +43,7 @@ Config.EnableSelling = false
 ---@field maxDistance? number the maximum distance from the player to the carcass
 
 ---@class ConfigTask
----@field id number
 ---@field title string
----@field description string
 ---@field cashReward number
 ---@field xpReward number
 ---@field requirements table<CarcassItem | 'any', TaskCondition>
@@ -45,9 +51,7 @@ Config.EnableSelling = false
 ---@type ConfigTask[]
 Config.Tasks = {
     {
-        id = 1,
         title = 'Hunting 101',
-        description = 'Kill a boar and collect it\'s carcass',
         cashReward = 100,
         xpReward = 1,
         requirements = {
@@ -57,9 +61,7 @@ Config.Tasks = {
         }
     },
     {
-        id = 2,
-        title = 'Birdwatching',
-        description = 'Kill a hawk',
+        title = 'Questionable Hunting',
         cashReward = 150,
         xpReward = 1,
         requirements = {
@@ -69,9 +71,7 @@ Config.Tasks = {
         }
     },
     {
-        id = 3,
-        title = 'Fishing for compliments',
-        description = 'Kill a cormorant',
+        title = 'Cormorant Killer',
         cashReward = 100,
         xpReward = 1,
         requirements = {
@@ -81,9 +81,7 @@ Config.Tasks = {
         }
     },
     {
-        id = 4,
         title = 'Coyote Ugly',
-        description = 'Kill a coyote',
         cashReward = 100,
         xpReward = 1,
         requirements = {
@@ -93,9 +91,7 @@ Config.Tasks = {
         }
     },
     {
-        id = 5,
         title = 'Deer Hunter',
-        description = 'Kill a deer',
         cashReward = 200,
         xpReward = 1,
         requirements = {
@@ -105,9 +101,7 @@ Config.Tasks = {
         }
     },
     {
-        id = 6,
         title = 'Mountain Lion',
-        description = 'Kill a mountain lion',
         cashReward = 250,
         xpReward = 1,
         requirements = {
@@ -117,9 +111,7 @@ Config.Tasks = {
         }
     },
     {
-        id = 7,
         title = 'Rabbit Season',
-        description = 'Kill a rabbit and sell its carcass to the butcher',
         cashReward = 50,
         xpReward = 1,
         requirements = {
