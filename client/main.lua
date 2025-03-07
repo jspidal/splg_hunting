@@ -6,8 +6,8 @@ local animals = {}
 local listItemCarcass = {}
 local carcassByItem = {}
 
-local Config = require 'config.shared'
-for key, value in pairs(Config.Carcass) do
+local SharedConfig = require 'config.shared'
+for key, value in pairs(SharedConfig.Carcass) do
     animals[#animals+1] = key
     listItemCarcass[#listItemCarcass+1] = value.item
     carcassByItem[value.item] = key
@@ -41,7 +41,7 @@ local function customControl()
                 Wait(0)
             end
             if heaviestCarcass ~= 0 then
-                enable = Config.Carcass[heaviestCarcass].drag
+                enable = SharedConfig.Carcass[heaviestCarcass].drag
             else
                 enable = false
             end
@@ -53,7 +53,7 @@ local function customControl()
 end
 
 local function playCarryAnim()
-    if Config.Carcass[heaviestCarcass].drag then
+    if SharedConfig.Carcass[heaviestCarcass].drag then
         lib.requestAnimDict('combat@drag_ped@')
         TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false, false)
         customControl()
@@ -105,10 +105,11 @@ local function carryCarcass()
 
             lib.requestModel(heaviestCarcass)
             DeleteEntity(carriedCarcass)
-            carriedCarcass = CreatePed(1, heaviestCarcass, GetEntityCoords(cache.ped), GetEntityHeading(cache.ped), true, true)
+            local pedPosition = GetEntityCoords(cache.ped)
+            carriedCarcass = CreatePed(1, heaviestCarcass, pedPosition.x, pedPosition.y, pedPosition.z, GetEntityHeading(cache.ped), true, true)
             SetEntityInvincible(carriedCarcass, true)
             SetEntityHealth(carriedCarcass, 0)
-            local pos = Config.Carcass[heaviestCarcass]
+            local pos = SharedConfig.Carcass[heaviestCarcass]
             AttachEntityToEntity(carriedCarcass, cache.ped, 11816, pos.xPos, pos.yPos, pos.zPos, pos.xRot, pos.yRot, pos.zRot, false, false, false, true, 2, true)
             playCarryAnim()
         else
@@ -119,15 +120,28 @@ local function carryCarcass()
     end)
 end
 
+-- Modified from https://github.com/Qbox-project/qbx_medical/blob/860a97ff430b4636c47d9b90a96595717be1a806/client/dead.lua#L115-L128
+AddEventHandler('gameEventTriggered', function(event, data)
+    if event ~= 'CEventNetworkEntityDamage' then return end
+    local victim, attacker, victimDied, weapon = data[1], data[2], data[4], data[7]
+    if not lib.table.contains(animals, GetEntityModel(victim)) then return end
+    if not IsEntityAPed(victim) or not victimDied or NetworkGetPlayerIndexFromPed(attacker) ~= cache.playerId or not IsEntityDead(victim) then return end
+
+    
+    TriggerServerEvent('splg_hunting:server:recordDistance', NetworkGetNetworkIdFromEntity(victim), NetworkGetNetworkIdFromEntity(attacker), weapon)
+end)
+
 exports('CarryCarcass', carryCarcass)
 
-RegisterNetEvent('ox:playerLoaded', function()
-    carryCarcass()
-end)
+-- RegisterNetEvent('ox:playerLoaded', function()
+--     carryCarcass()
+-- end)
+-- AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+--     carryCarcass()
+-- end)
+
+-- change when esx bridge
 RegisterNetEvent('esx:playerLoaded',function ()
-    carryCarcass()
-end)
-AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
     carryCarcass()
 end)
 
@@ -171,7 +185,7 @@ exports.ox_target:addModel(animals, {
 
 --------------------- SELL -----------------------------------
 
-if Config.EnableSelling then
+if SharedConfig.EnableSelling then
 
     local function sellCarcass()
         if lib.progressCircle({
@@ -186,7 +200,7 @@ if Config.EnableSelling then
                 mouse = false
             },
         }) then
-            TriggerServerEvent('mana_hunting:SellCarcass', Config.Carcass[heaviestCarcass].item)
+            TriggerServerEvent('mana_hunting:SellCarcass', SharedConfig.Carcass[heaviestCarcass].item)
         end
     end
 
@@ -207,7 +221,7 @@ if Config.EnableSelling then
     })
 
     CreateThread(function()
-        blip = AddBlipForCoord(963.34, -2115.39)
+        blip = AddBlipForCoord(963.34, -2115.39, 0)
         SetBlipSprite(blip, 141)
         SetBlipScale(blip, 0.8)
         SetBlipColour(blip, 43)
@@ -234,3 +248,20 @@ RegisterNUICallback(Receive.requestTasks, function(_, cb)
     -- Request tasks logic
     cb(1)
 end)
+
+local function openNUI()
+    
+    local defaultLocale = GetConvar('ox:locale', 'en')
+    local selectedLocale = GetExternalKvpString('ox_lib', 'locale') or defaultLocale
+
+    local localeData = json.encode(LoadResourceFile(GetCurrentResourceName(), 'locales/' .. selectedLocale .. '.json'))
+
+    local data = {
+        locale = localeData
+    }
+
+    SendNUIEvent(Send.data, data)
+    SetNuiFocus(true, true)
+    SendNUIEvent(Send.visible, true)
+
+end
