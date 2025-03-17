@@ -5,7 +5,7 @@ local SharedConfig = require 'config.shared'
 
 local ServerConfig = require 'config.server'
 
-local Task = require 'server.task'
+local Task, _ = require 'server.task'
 local tasks = {}
 
 local animals = {}
@@ -19,7 +19,7 @@ assert(lib.checkDependency('ox_lib', '3.21.0', true))
 assert(lib.checkDependency('ox_inventory', '2.28.0', true))
 assert(lib.checkDependency('ox_target', '1.8.0'), true)
 
-exports.pickle_xp:RegisterXPCategory('hunting', "Hunting", 1000, 0.5, 5)
+-- exports.pickle_xp:RegisterXPCategory('hunting', "Hunting", 1000, 0.5, 5)
 
 local function isPlayerFarming(source, coords)
     if ServerConfig.AntiFarm.enable == false then return false end
@@ -75,8 +75,12 @@ local function map(x, in_min, in_max, out_min, out_max)
 end
 
 local function checkTaskConditions(playerId, carcass, weapon, isHeadshot, distance)
-    
-
+    for i = 1, #tasks[playerId] do
+        local task = tasks[playerId][i]
+        if task then
+            task:checkRequirements(carcass, weapon, isHeadshot, distance)
+        end
+    end
 end
 
 RegisterNetEvent('mana_hunting:harvestCarcass', function (entityId, bone)
@@ -98,6 +102,8 @@ RegisterNetEvent('mana_hunting:harvestCarcass', function (entityId, bone)
     if exports.ox_inventory:CanCarryItem(source, carcass.item, 1) and DoesEntityExist(entity) and GetEntityAttachedTo(entity) == 0 then
         exports.ox_inventory:AddItem(source, carcass.item, 1, {type = grade, image =  image})
         DeleteEntity(entity)
+        local distance = Entity(entity).state.killedDistance or 0
+        checkTaskConditions(source, carcass, weapon, isHeadshot, distance)
     end
 end)
 

@@ -37,7 +37,7 @@ Config.EnableSelling = false
 ---@class TaskCondition
 ---@field amount integer the required number of aniamls to complete the task
 ---@field weapon? string | integer the hash of the required weapon to kill the animal
----@field quality? number the required quality of the carcass
+---@field quality? number  the required quality of the carcass
 ---@field headshot? boolean whether the animal was headshot
 ---@field minDistance? number the minimum distance from the player to the carcass
 ---@field maxDistance? number the maximum distance from the player to the carcass
