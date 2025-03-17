@@ -23,7 +23,7 @@ importers:
         version: 0.4.0(tailwindcss@3.3.3)
       '@sveltejs/vite-plugin-svelte':
         specifier: ^2.4.2
-        version: 2.4.2(svelte@4.0.5)(vite@4.4.9)
+        version: 2.4.2(svelte@4.0.5)(vite@4.4.9(@types/node@22.0.2))
       '@tailwindcss/forms':
         specifier: ^0.5.7
         version: 0.5.7(tailwindcss@3.3.3)
@@ -42,12 +42,21 @@ importers:
       postcss:
         specifier: ^8.4.30
         version: 8.4.30
+      prettier:
+        specifier: ^3.5.3
+        version: 3.5.3
+      prettier-plugin-svelte:
+        specifier: ^3.3.3
+        version: 3.3.3(prettier@3.5.3)(svelte@4.0.5)
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.11
+        version: 0.6.11(prettier-plugin-svelte@3.3.3(prettier@3.5.3)(svelte@4.0.5))(prettier@3.5.3)
       svelte:
         specifier: ^4.0.5
         version: 4.0.5
       svelte-check:
         specifier: ^3.4.6
-        version: 3.4.6(postcss@8.4.30)(svelte@4.0.5)
+        version: 3.4.6(postcss-load-config@4.0.1(postcss@8.4.30))(postcss@8.4.30)(svelte@4.0.5)
       tailwindcss:
         specifier: ^3.3.3
         version: 3.3.3
@@ -65,7 +74,7 @@ importers:
         version: 4.4.9(@types/node@22.0.2)
       vite-plugin-tailwind-purgecss:
         specifier: ^0.3.3
-        version: 0.3.3(tailwindcss@3.3.3)(vite@4.4.9)
+        version: 0.3.3(tailwindcss@3.3.3)(vite@4.4.9(@types/node@22.0.2))
 
 packages:
 
@@ -891,6 +900,72 @@ packages:
     resolution: {integrity: sha512-7ZEao1g4kd68l97aWG/etQKPKq07us0ieSZ2TnFDk11i0ZfDW2AwKHYU8qv4MZKqN2fdBfg+7q0ES06UA73C1g==}
     engines: {node: ^10 || ^12 || >=14}
 
+  prettier-plugin-svelte@3.3.3:
+    resolution: {integrity: sha512-yViK9zqQ+H2qZD1w/bH7W8i+bVfKrD8GIFjkFe4Thl6kCT9SlAsXVNmt3jCvQOCsnOhcvYgsoVlRV/Eu6x5nNw==}
+    peerDependencies:
+      prettier: ^3.0.0
+      svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
+
+  prettier-plugin-tailwindcss@0.6.11:
+    resolution: {integrity: sha512-YxaYSIvZPAqhrrEpRtonnrXdghZg1irNg4qrjboCXrpybLWVs55cW2N3juhspVJiO0JBvYJT8SYsJpc8OQSnsA==}
+    engines: {node: '>=14.21.3'}
+    peerDependencies:
+      '@ianvs/prettier-plugin-sort-imports': '*'
+      '@prettier/plugin-pug': '*'
+      '@shopify/prettier-plugin-liquid': '*'
+      '@trivago/prettier-plugin-sort-imports': '*'
+      '@zackad/prettier-plugin-twig': '*'
+      prettier: ^3.0
+      prettier-plugin-astro: '*'
+      prettier-plugin-css-order: '*'
+      prettier-plugin-import-sort: '*'
+      prettier-plugin-jsdoc: '*'
+      prettier-plugin-marko: '*'
+      prettier-plugin-multiline-arrays: '*'
+      prettier-plugin-organize-attributes: '*'
+      prettier-plugin-organize-imports: '*'
+      prettier-plugin-sort-imports: '*'
+      prettier-plugin-style-order: '*'
+      prettier-plugin-svelte: '*'
+    peerDependenciesMeta:
+      '@ianvs/prettier-plugin-sort-imports':
+        optional: true
+      '@prettier/plugin-pug':
+        optional: true
+      '@shopify/prettier-plugin-liquid':
+        optional: true
+      '@trivago/prettier-plugin-sort-imports':
+        optional: true
+      '@zackad/prettier-plugin-twig':
+        optional: true
+      prettier-plugin-astro:
+        optional: true
+      prettier-plugin-css-order:
+        optional: true
+      prettier-plugin-import-sort:
+        optional: true
+      prettier-plugin-jsdoc:
+        optional: true
+      prettier-plugin-marko:
+        optional: true
+      prettier-plugin-multiline-arrays:
+        optional: true
+      prettier-plugin-organize-attributes:
+        optional: true
+      prettier-plugin-organize-imports:
+        optional: true
+      prettier-plugin-sort-imports:
+        optional: true
+      prettier-plugin-style-order:
+        optional: true
+      prettier-plugin-svelte:
+        optional: true
+
+  prettier@3.5.3:
+    resolution: {integrity: sha512-QQtaxnoDJeAkDvDKWCLiwIXkTgRhwYDEQCghU9Z6q03iyek/rxRh/2lC3HB7P8sWT2xC/y5JDctPLBIGzHKbhw==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   process@0.11.10:
     resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
@@ -1368,18 +1443,18 @@ snapshots:
     dependencies:
       tailwindcss: 3.3.3
 
-  '@sveltejs/vite-plugin-svelte-inspector@1.0.4(@sveltejs/vite-plugin-svelte@2.4.2)(svelte@4.0.5)(vite@4.4.9)':
+  '@sveltejs/vite-plugin-svelte-inspector@1.0.4(@sveltejs/vite-plugin-svelte@2.4.2(svelte@4.0.5)(vite@4.4.9(@types/node@22.0.2)))(svelte@4.0.5)(vite@4.4.9(@types/node@22.0.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 2.4.2(svelte@4.0.5)(vite@4.4.9)
+      '@sveltejs/vite-plugin-svelte': 2.4.2(svelte@4.0.5)(vite@4.4.9(@types/node@22.0.2))
       debug: 4.3.4
       svelte: 4.0.5
       vite: 4.4.9(@types/node@22.0.2)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@2.4.2(svelte@4.0.5)(vite@4.4.9)':
+  '@sveltejs/vite-plugin-svelte@2.4.2(svelte@4.0.5)(vite@4.4.9(@types/node@22.0.2))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 1.0.4(@sveltejs/vite-plugin-svelte@2.4.2)(svelte@4.0.5)(vite@4.4.9)
+      '@sveltejs/vite-plugin-svelte-inspector': 1.0.4(@sveltejs/vite-plugin-svelte@2.4.2(svelte@4.0.5)(vite@4.4.9(@types/node@22.0.2)))(svelte@4.0.5)(vite@4.4.9(@types/node@22.0.2))
       debug: 4.3.4
       deepmerge: 4.3.1
       kleur: 4.1.5
@@ -1387,7 +1462,7 @@ snapshots:
       svelte: 4.0.5
       svelte-hmr: 0.15.3(svelte@4.0.5)
       vite: 4.4.9(@types/node@22.0.2)
-      vitefu: 0.2.4(vite@4.4.9)
+      vitefu: 0.2.4(vite@4.4.9(@types/node@22.0.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -1942,8 +2017,9 @@ snapshots:
   postcss-load-config@4.0.1(postcss@8.4.30):
     dependencies:
       lilconfig: 2.1.0
-      postcss: 8.4.30
       yaml: 2.3.2
+    optionalDependencies:
+      postcss: 8.4.30
 
   postcss-nested@6.0.1(postcss@8.4.30):
     dependencies:
@@ -1962,6 +2038,19 @@ snapshots:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
+
+  prettier-plugin-svelte@3.3.3(prettier@3.5.3)(svelte@4.0.5):
+    dependencies:
+      prettier: 3.5.3
+      svelte: 4.0.5
+
+  prettier-plugin-tailwindcss@0.6.11(prettier-plugin-svelte@3.3.3(prettier@3.5.3)(svelte@4.0.5))(prettier@3.5.3):
+    dependencies:
+      prettier: 3.5.3
+    optionalDependencies:
+      prettier-plugin-svelte: 3.3.3(prettier@3.5.3)(svelte@4.0.5)
+
+  prettier@3.5.3: {}
 
   process@0.11.10: {}
 
@@ -2079,7 +2168,7 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@3.4.6(postcss@8.4.30)(svelte@4.0.5):
+  svelte-check@3.4.6(postcss-load-config@4.0.1(postcss@8.4.30))(postcss@8.4.30)(svelte@4.0.5):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.19
       chokidar: 3.5.3
@@ -2088,7 +2177,7 @@ snapshots:
       picocolors: 1.0.0
       sade: 1.8.1
       svelte: 4.0.5
-      svelte-preprocess: 5.0.4(postcss@8.4.30)(svelte@4.0.5)(typescript@5.2.2)
+      svelte-preprocess: 5.0.4(postcss-load-config@4.0.1(postcss@8.4.30))(postcss@8.4.30)(svelte@4.0.5)(typescript@5.2.2)
       typescript: 5.2.2
     transitivePeerDependencies:
       - '@babel/core'
@@ -2105,15 +2194,17 @@ snapshots:
     dependencies:
       svelte: 4.0.5
 
-  svelte-preprocess@5.0.4(postcss@8.4.30)(svelte@4.0.5)(typescript@5.2.2):
+  svelte-preprocess@5.0.4(postcss-load-config@4.0.1(postcss@8.4.30))(postcss@8.4.30)(svelte@4.0.5)(typescript@5.2.2):
     dependencies:
       '@types/pug': 2.0.7
       detect-indent: 6.1.0
       magic-string: 0.27.0
-      postcss: 8.4.30
       sorcery: 0.11.0
       strip-indent: 3.0.0
       svelte: 4.0.5
+    optionalDependencies:
+      postcss: 8.4.30
+      postcss-load-config: 4.0.1(postcss@8.4.30)
       typescript: 5.2.2
 
   svelte@4.0.5:
@@ -2216,7 +2307,7 @@ snapshots:
     dependencies:
       inherits: 2.0.3
 
-  vite-plugin-tailwind-purgecss@0.3.3(tailwindcss@3.3.3)(vite@4.4.9):
+  vite-plugin-tailwind-purgecss@0.3.3(tailwindcss@3.3.3)(vite@4.4.9(@types/node@22.0.2)):
     dependencies:
       chalk: 5.3.0
       css-tree: 2.3.1
@@ -2228,15 +2319,15 @@ snapshots:
 
   vite@4.4.9(@types/node@22.0.2):
     dependencies:
-      '@types/node': 22.0.2
       esbuild: 0.18.20
       postcss: 8.4.30
       rollup: 3.29.3
     optionalDependencies:
+      '@types/node': 22.0.2
       fsevents: 2.3.3
 
-  vitefu@0.2.4(vite@4.4.9):
-    dependencies:
+  vitefu@0.2.4(vite@4.4.9(@types/node@22.0.2)):
+    optionalDependencies:
       vite: 4.4.9(@types/node@22.0.2)
 
   webpack-sources@3.2.3: {}
