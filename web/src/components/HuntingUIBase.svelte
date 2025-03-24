@@ -13,48 +13,46 @@
 
 <div class="flex h-screen flex-auto items-center justify-center">
 	<div
-		class="bg-surface-50-900-token rounded-container-token mx-auto flex h-[80vh] w-full max-w-[90vw] flex-col md:max-w-[85vw] lg:max-w-[80vw] xl:max-w-[75vw] 2xl:max-w-[70vw]"
+		class="bg-surface-50-900-token rounded-container-token 4xl:w-[75vw] mx-auto flex h-[80vh] w-[70vw] flex-col"
 	>
 		<AppBar
-			class="rounded-tl-container-token rounded-tr-container-token p-2 md:p-3 xl:p-4"
+			class="rounded-tl-container-token rounded-tr-container-token p-[0.6rem]"
 			gridColumns="grid-cols-3"
 			slotDefault="place-self-center"
 			slotTrail="place-self-end self-center"
 		>
 			<svelte:fragment slot="lead">
-				<HuntingIcon
-					class="fill-token h-[3.5rem] w-[3.5rem] xl:h-[4rem] xl:w-[4rem] 2xl:h-[4.5rem] 2xl:w-[4.5rem]"
-				/>
+				<HuntingIcon class="fill-token 4xl:h-14 4xl:w-14 h-12 w-12" />
 			</svelte:fragment>
 
-			<h1 class="h1 text-[clamp(1.5rem,2vw,3rem)]">
+			<h2 class="h2">
 				{$LOCALE.HUNTING_LABEL}
-			</h1>
+			</h2>
 
 			<svelte:fragment slot="trail">
-				<div class="inline-flex gap-4">
+				<div class="my-0 inline-flex flex-grow gap-4">
 					<a
 						href="/"
-						class="rounded-container-token flex flex-row items-center gap-1 p-2 {classesActive(
+						class="rounded-container-token inline-flex items-center gap-1 p-2 {classesActive(
 							'/',
 						)}"
 					>
-						<IcBaselineHome class="h-[1em] w-[1em]" />
+						<IcBaselineHome class="h-6 w-6" />
 						<span>{$LOCALE.HOME_LABEL}</span>
 					</a>
 					<a
 						href="/profile"
-						class="rounded-container-token flex flex-row items-center gap-1 p-2 {classesActive(
+						class="rounded-container-token inline-flex items-center gap-1 p-2 {classesActive(
 							'/profile',
 						)}"
 					>
-						<IcBaselinePerson class="h-[1em] w-[1em]" />
+						<IcBaselinePerson class="h-6 w-6" />
 						<span>{$LOCALE.PROFILE_LABEL}</span>
 					</a>
 				</div>
 			</svelte:fragment>
 		</AppBar>
-		<div class="flex-1 overflow-auto p-4">
+		<div class="flex h-full items-center justify-center overflow-auto">
 			<slot />
 		</div>
 	</div>

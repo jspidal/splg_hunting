@@ -15,30 +15,26 @@
 	});
 </script>
 
-<div class="h-full overflow-hidden flex flex-col items-center justify-center">
-	{#if tasks.length == 0}
-		<div class="flex flex-row">
+<div class="mx-12 flex h-full grow flex-col">
+	{#if tasks.length < 1}
+		<div class="flex h-full items-center justify-center">
 			<h1 class="h1">{$LOCALE.LOADING_LABEL}</h1>
 		</div>
 	{:else}
-		<h2 class="h2">{$LOCALE.AVAILABLE_TASKS_LABEL}</h2>
-		<div class="m-8 mt-12 flex flex-row flex-wrap gap-8 justify-center">
-			{#each tasks as task}
-				<TaskCard
-					taskId={task.id}
-					title={task.title}
-					cashReward={task.cashReward}
-					xpReward={task.xpReward}
-					canClaim={task.canClaim}
-					requirements={task.requirements}
-				/>
-			{/each}
+		<h3 class="h3 mx-auto">{$LOCALE.AVAILABLE_TASKS_LABEL}</h3>
+		<div class="flex-1 overflow-auto">
+			<div class="grid h-full grid-cols-2 gap-6 p-4 xl:grid-cols-3">
+				{#each tasks as task}
+					<TaskCard
+						taskId={task.id}
+						title={task.title}
+						cashReward={task.cashReward}
+						xpReward={task.xpReward}
+						canClaim={task.canClaim}
+						requirements={task.requirements}
+					/>
+				{/each}
+			</div>
 		</div>
 	{/if}
-	<!-- <TaskCard title="Coyote Ugly" cashReward={100} xpReward={10} canClaim={true}/>
-        <TaskCard title="Deer Hunter" cashReward={200} xpReward={20} canClaim={true}/>
-        <TaskCard title="Rabbit Season" cashReward={300} xpReward={30} canClaim={false}/>
-        <TaskCard title="Bear Necessities" cashReward={400} xpReward={40} canClaim={true}/>
-        <TaskCard title="Duck Hunt" cashReward={500} xpReward={50} canClaim={false}/>
-        <TaskCard title="Elk Hunt" cashReward={600} xpReward={60} canClaim={false}/> -->
 </div>
