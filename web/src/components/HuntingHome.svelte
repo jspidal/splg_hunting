@@ -21,20 +21,20 @@
 			<h1 class="h1">{$LOCALE.LOADING_LABEL}</h1>
 		</div>
 	{:else}
-		<h3 class="h3 mx-auto">{$LOCALE.AVAILABLE_TASKS_LABEL}</h3>
-		<div class="flex-1 overflow-auto">
-			<div class="grid h-full grid-cols-2 gap-6 p-4 xl:grid-cols-3">
-				{#each tasks as task}
-					<TaskCard
-						taskId={task.id}
-						title={task.title}
-						cashReward={task.cashReward}
-						xpReward={task.xpReward}
-						canClaim={task.canClaim}
-						requirements={task.requirements}
-					/>
-				{/each}
-			</div>
+		<!-- <h3 class="h3 mx-auto">{$LOCALE.AVAILABLE_TASKS_LABEL}</h3> -->
+		<!-- <div class="flex-1"> -->
+		<div class="grid h-full grid-cols-2 gap-6 p-4 py-12 xl:grid-cols-3">
+			{#each tasks as task}
+				<TaskCard
+					taskId={task.id}
+					title={task.title}
+					cashReward={task.cashReward}
+					xpReward={task.xpReward}
+					canClaim={task.canClaim}
+					requirements={task.requirements}
+				/>
+			{/each}
 		</div>
+		<!-- </div> -->
 	{/if}
 </div>

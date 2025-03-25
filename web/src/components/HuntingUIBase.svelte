@@ -52,7 +52,7 @@
 				</div>
 			</svelte:fragment>
 		</AppBar>
-		<div class="flex h-full items-center justify-center overflow-auto">
+		<div class="flex h-full items-center justify-center">
 			<slot />
 		</div>
 	</div>
