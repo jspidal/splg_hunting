@@ -5,7 +5,7 @@ export interface Config {
 
 export interface Task {
     id: number;
-    title: string;
+    title?: string;
     cashReward: number;
     xpReward: number;
     canClaim: boolean;
