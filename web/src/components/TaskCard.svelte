@@ -23,9 +23,17 @@
 		<h3 class="h3">
 			{title ? title : 'Hunting Task'}
 		</h3>
-		<span class="ml-auto">
-			<h4 class="h4 text-success-600">${cashReward}</h4>
-			<h5 class="h5 text-success-600">{xpReward}XP</h5>
+		<span class="ml-auto inline-grid gap-2">
+			<span class="chip rounded-token variant-soft-success cursor-auto">
+				<p class="text-base font-bold">
+					${cashReward}
+				</p>
+			</span>
+			<span class="chip rounded-token variant-soft-secondary cursor-auto">
+				<p class="text-base font-bold">
+					{xpReward}XP
+				</p>
+			</span>
 		</span>
 	</header>
 	<section class="place-self-start pl-4 xl:py-4">
@@ -41,8 +49,14 @@
 			</ul>
 		{/if}
 	</section>
-	<footer class="card-footer flex items-center gap-4">
-		<ProgressBar class="rounded-md" meter="bg-primary-500" />
+	<footer class="card-footer flex items-center gap-4 overflow-hidden">
+		<ProgressBar
+			height="h-2"
+			rounded="rounded-token"
+			track="bg-surface-400-500-token"
+			meter="bg-primary-500"
+			value={55}
+		/>
 		{#if $TASK_BUTTONS_VISIBLE}
 			<button
 				class="btn variant-soft-primary ml-auto"
