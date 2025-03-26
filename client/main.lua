@@ -8,8 +8,8 @@ local carcassByItem = {}
 
 local SharedConfig = require 'config.shared'
 for key, value in pairs(SharedConfig.Carcass) do
-    animals[#animals+1] = key
-    listItemCarcass[#listItemCarcass+1] = value.item
+    animals[#animals + 1] = key
+    listItemCarcass[#listItemCarcass + 1] = value.item
     carcassByItem[value.item] = key
 end
 
@@ -24,12 +24,12 @@ local function customControl()
             if IsControlPressed(0, 35) then -- Right
                 idle = false
                 FreezeEntityPosition(playerPed, false)
-                SetEntityHeading(playerPed, GetEntityHeading(playerPed)+0.5)
+                SetEntityHeading(playerPed, GetEntityHeading(playerPed) + 0.5)
                 Wait(7)
             elseif IsControlPressed(0, 34) then -- Left
                 idle = false
                 FreezeEntityPosition(playerPed, false)
-                SetEntityHeading(playerPed, GetEntityHeading(playerPed)-0.5)
+                SetEntityHeading(playerPed, GetEntityHeading(playerPed) - 0.5)
                 Wait(7)
             elseif IsControlPressed(0, 32) or IsControlPressed(0, 33) then
                 idle = false
@@ -60,11 +60,13 @@ local function playCarryAnim()
         while carriedCarcass ~= 0 do
             if idle then
                 if not IsEntityPlayingAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2) then
-                    TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 0.0, 0.0, 1, 2, 7, false, false, false)
+                    TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 0.0, 0.0, 1, 2, 7, false, false,
+                        false)
                 end
             else
                 if not IsEntityPlayingAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 1) then
-                    TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false, false)
+                    TaskPlayAnim(cache.ped, 'combat@drag_ped@', 'injured_drag_plyr', 2.0, 2.0, 100000, 1, 0, false, false,
+                        false)
                 end
             end
             Wait(0)
@@ -72,10 +74,12 @@ local function playCarryAnim()
         RemoveAnimDict('combat@drag_ped@')
     else
         lib.requestAnimDict('missfinale_c2mcs_1')
-        TaskPlayAnim(cache.ped, 'missfinale_c2mcs_1', 'fin_c2_mcs_1_camman', 8.0, -8.0, 100000, 49, 0, false, false, false)
+        TaskPlayAnim(cache.ped, 'missfinale_c2mcs_1', 'fin_c2_mcs_1_camman', 8.0, -8.0, 100000, 49, 0, false, false,
+            false)
         while carriedCarcass ~= 0 do
             while not IsEntityPlayingAnim(cache.ped, 'missfinale_c2mcs_1', 'fin_c2_mcs_1_camman', 49) do
-                TaskPlayAnim(cache.ped, 'missfinale_c2mcs_1', 'fin_c2_mcs_1_camman', 8.0, -8.0, 100000, 49, 0, false, false, false)
+                TaskPlayAnim(cache.ped, 'missfinale_c2mcs_1', 'fin_c2_mcs_1_camman', 8.0, -8.0, 100000, 49, 0, false,
+                    false, false)
                 Wait(0)
             end
             Wait(500)
@@ -106,11 +110,13 @@ local function carryCarcass()
             lib.requestModel(heaviestCarcass)
             DeleteEntity(carriedCarcass)
             local pedPosition = GetEntityCoords(cache.ped)
-            carriedCarcass = CreatePed(1, heaviestCarcass, pedPosition.x, pedPosition.y, pedPosition.z, GetEntityHeading(cache.ped), true, true)
+            carriedCarcass = CreatePed(1, heaviestCarcass, pedPosition.x, pedPosition.y, pedPosition.z,
+                GetEntityHeading(cache.ped), true, true)
             SetEntityInvincible(carriedCarcass, true)
             SetEntityHealth(carriedCarcass, 0)
             local pos = SharedConfig.Carcass[heaviestCarcass]
-            AttachEntityToEntity(carriedCarcass, cache.ped, 11816, pos.xPos, pos.yPos, pos.zPos, pos.xRot, pos.yRot, pos.zRot, false, false, false, true, 2, true)
+            AttachEntityToEntity(carriedCarcass, cache.ped, 11816, pos.xPos, pos.yPos, pos.zPos, pos.xRot, pos.yRot,
+                pos.zRot, false, false, false, true, 2, true)
             playCarryAnim()
         else
             DeleteEntity(carriedCarcass)
@@ -127,21 +133,14 @@ AddEventHandler('gameEventTriggered', function(event, data)
     if not lib.table.contains(animals, GetEntityModel(victim)) then return end
     if not IsEntityAPed(victim) or not victimDied or NetworkGetPlayerIndexFromPed(attacker) ~= cache.playerId or not IsEntityDead(victim) then return end
 
-    
-    TriggerServerEvent('splg_hunting:server:recordDistance', NetworkGetNetworkIdFromEntity(victim), NetworkGetNetworkIdFromEntity(attacker), weapon)
+
+    TriggerServerEvent('splg_hunting:server:recordDistance', NetworkGetNetworkIdFromEntity(victim),
+        NetworkGetNetworkIdFromEntity(attacker), weapon)
 end)
 
 exports('CarryCarcass', carryCarcass)
 
--- RegisterNetEvent('ox:playerLoaded', function()
---     carryCarcass()
--- end)
--- AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
---     carryCarcass()
--- end)
-
--- change when esx bridge
-RegisterNetEvent('esx:playerLoaded',function ()
+AddEventHandler('bl_bridge:client:playerLoaded', function()
     carryCarcass()
 end)
 
@@ -152,22 +151,22 @@ local function pickupCarcass(data)
     TaskTurnPedToFaceEntity(cache.ped, entity, -1)
     Wait(500)
     if lib.progressCircle({
-        duration = 3000,
-        label = locale('pickup_carcass'),
-        useWhileDead = false,
-        canCancel = true,
-        disable = {
-            move = true,
-            car = true,
-            combat = true,
-            mouse = false
-        },
-        anim = {
-            dict = 'amb@medic@standing@kneel@idle_a',
-            clip = 'idle_a',
-            flag = 1,
-        },
-    }) then
+            duration = 3000,
+            label = locale('pickup_carcass'),
+            useWhileDead = false,
+            canCancel = true,
+            disable = {
+                move = true,
+                car = true,
+                combat = true,
+                mouse = false
+            },
+            anim = {
+                dict = 'amb@medic@standing@kneel@idle_a',
+                clip = 'idle_a',
+                flag = 1,
+            },
+        }) then
         TriggerServerEvent('mana_hunting:harvestCarcass', NetworkGetNetworkIdFromEntity(entity), bone)
     end
 end
@@ -186,20 +185,19 @@ exports.ox_target:addModel(animals, {
 --------------------- SELL -----------------------------------
 
 if SharedConfig.EnableSelling then
-
     local function sellCarcass()
         if lib.progressCircle({
-            duration = 3000,
-            label = locale('sell_in_progress'),
-            useWhileDead = false,
-            canCancel = true,
-            disable = {
-                move = true,
-                car = true,
-                combat = true,
-                mouse = false
-            },
-        }) then
+                duration = 3000,
+                label = locale('sell_in_progress'),
+                useWhileDead = false,
+                canCancel = true,
+                disable = {
+                    move = true,
+                    car = true,
+                    combat = true,
+                    mouse = false
+                },
+            }) then
             TriggerServerEvent('mana_hunting:SellCarcass', SharedConfig.Carcass[heaviestCarcass].item)
         end
     end
@@ -250,7 +248,6 @@ RegisterNUICallback(Receive.requestTasks, function(_, cb)
 end)
 
 local function openNUI()
-    
     local defaultLocale = GetConvar('ox:locale', 'en')
     local selectedLocale = GetExternalKvpString('ox_lib', 'locale') or defaultLocale
 
@@ -263,5 +260,4 @@ local function openNUI()
     SendNUIEvent(Send.data, data)
     SetNuiFocus(true, true)
     SendNUIEvent(Send.visible, true)
-
 end

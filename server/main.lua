@@ -2,8 +2,9 @@ lib.locale()
 local antifarm = {}
 
 local SharedConfig = require 'config.shared'
-
 local ServerConfig = require 'config.server'
+
+local core <const> = Framework.core or exports.bl_bridge:core()
 
 local Task, _ = require 'server.task'
 local tasks = {}
@@ -11,7 +12,7 @@ local tasks = {}
 local animals = {}
 
 for key, _ in pairs(SharedConfig.Carcass) do
-    animals[#animals+1] = key
+    animals[#animals + 1] = key
 end
 
 lib.versionCheck('jspidal/mana_hunting')
@@ -32,16 +33,16 @@ local function isPlayerFarming(source, coords)
     if not next(antifarm) or playerData == nil or not next(playerData) then -- table empty
         playerData = {
             {
-                time = curentTime, coords = coords, amount= 1
+                time = curentTime, coords = coords, amount = 1
             }
         }
         return false
     end
     for i = 1, #playerData do
-        if (curentTime - playerData[i].time) > ServerConfig.AntiFarm.time then -- delete old table
+        if (curentTime - playerData[i].time) > ServerConfig.AntiFarm.time then    -- delete old table
             playerData[i] = nil
         elseif #(playerData[i].coords - coords) < ServerConfig.AntiFarm.size then -- if found table in coord
-            if playerData[i].amount >= ServerConfig.AntiFarm.maxAmount then -- if amount more than max
+            if playerData[i].amount >= ServerConfig.AntiFarm.maxAmount then       -- if amount more than max
                 return true
             end
             playerData[i].amount += 1 -- if not amount more than max
@@ -49,20 +50,20 @@ local function isPlayerFarming(source, coords)
             return false
         end
     end
-    playerData[#playerData+1] = {time = curentTime, coords = coords, amount= 1} -- if no table in coords found
+    playerData[#playerData + 1] = { time = curentTime, coords = coords, amount = 1 } -- if no table in coords found
     return false
 end
 
 local function getCarcassGrade(weapon, bone, carcass)
     local grade = '★☆☆'
-    local image =  carcass.item..1
+    local image = carcass.item .. 1
     local isHeadshot = false
     if lib.table.contains(ServerConfig.GoodWeapon, weapon) then
         grade = '★★☆'
-        image =  carcass.item..2
+        image = carcass.item .. 2
         if lib.table.contains(carcass.headshotBones, bone) then
             grade = '★★★'
-            image =  carcass.item..3
+            image = carcass.item .. 3
             isHeadshot = true
         end
     end
@@ -83,16 +84,16 @@ local function checkTaskConditions(playerId, carcass, weapon, isHeadshot, distan
     end
 end
 
-RegisterNetEvent('mana_hunting:harvestCarcass', function (entityId, bone)
+RegisterNetEvent('mana_hunting:harvestCarcass', function(entityId, bone)
     local playerCoords = GetEntityCoords(GetPlayerPed(source))
     local entity = NetworkGetEntityFromNetworkId(entityId)
     local entityCoords = GetEntityCoords(entity)
     if #(playerCoords - entityCoords) >= 5 then
-        TriggerClientEvent('ox_lib:notify', source, {type = 'error', description = locale('too_far')})
+        TriggerClientEvent('ox_lib:notify', source, { type = 'error', description = locale('too_far') })
         return
     end
     if isPlayerFarming(source, entityCoords) then
-        TriggerClientEvent('ox_lib:notify', source, {type = 'error', description = locale('stop_farm')})
+        TriggerClientEvent('ox_lib:notify', source, { type = 'error', description = locale('stop_farm') })
         return
     end
     local weapon = GetPedCauseOfDeath(entity)
@@ -100,7 +101,7 @@ RegisterNetEvent('mana_hunting:harvestCarcass', function (entityId, bone)
     local carcass = SharedConfig.Carcass[carcassModel]
     local grade, image, isHeadshot = getCarcassGrade(weapon, bone, carcass)
     if exports.ox_inventory:CanCarryItem(source, carcass.item, 1) and DoesEntityExist(entity) and GetEntityAttachedTo(entity) == 0 then
-        exports.ox_inventory:AddItem(source, carcass.item, 1, {type = grade, image =  image})
+        exports.ox_inventory:AddItem(source, carcass.item, 1, { type = grade, image = image })
         DeleteEntity(entity)
         local distance = Entity(entity).state.killedDistance or 0
         checkTaskConditions(source, carcass, weapon, isHeadshot, distance)
@@ -108,7 +109,7 @@ RegisterNetEvent('mana_hunting:harvestCarcass', function (entityId, bone)
 end)
 
 if SharedConfig.EnableSelling then
-    RegisterNetEvent('mana_hunting:SellCarcass',function (item)
+    RegisterNetEvent('mana_hunting:SellCarcass', function(item)
         local itemData = exports.ox_inventory:Search(source, 'slots', item)[1]
         if itemData.count < 1 then return end
 
@@ -142,8 +143,12 @@ RegisterNetEvent('splg_hunting:server:recordDistance', function(victimId, attack
     local playerPositon = GetEntityCoords(attacker)
     local animalPosition = GetEntityCoords(victim)
     local distance = #(playerPositon - animalPosition)
-    
+
     Entity(victim).state.killedDistance = distance
+end)
+
+lib.callback.register('splg_hunting:server:getTasks', function(source)
+
 end)
 
 -- Choose initial tasks for player
@@ -152,18 +157,25 @@ local function initialTasks(uniqueId)
     if not tasks[uniqueId] then
         tasks[uniqueId] = {}
         -- Check if player has any tasks already
-        MySQL.prepare('INSERT INTO splg_hunting_users (user_id) VALUES (?) ON DUPLICATE KEY UPDATE user_id = user_id', {uniqueId})
-        local response = MySQL.query.await('SELECT * FROM splg_hunting_tasks WHERE uniqueId = ? AND completed = 0', {uniqueId})
-        if response and next(response) then 
+        MySQL.prepare('INSERT INTO splg_hunting_users (user_id) VALUES (?) ON DUPLICATE KEY UPDATE user_id = user_id',
+            { uniqueId })
+        local response = MySQL.query.await('SELECT * FROM splg_hunting_tasks WHERE uniqueId = ? AND completed = 0',
+            { uniqueId })
+        if response and next(response) then
             for i = 1, #response do
-                local task = Task:new(response[i].id, response[i].title, response[i].cash_reward, response[i].xp_reward, false, response[i].requirements)
+                local task = Task:new(response[i].id, response[i].title, response[i].cash_reward, response[i].xp_reward,
+                    false, response[i].requirements)
                 tasks[uniqueId][#tasks[uniqueId] + 1] = task
             end
             return
         end
         for i = 1, 6 do
-            local id = MySQL.insert.await('INSERT INTO splg_hunting_tasks (user_id, title, cash_reward, xp_reward, completed, requirements) VALUES (?, ?, ?, ?, ?, ?)', {ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward, ServerConfig.Tasks[i].xpReward, false, ServerConfig.Tasks[i].requirements})
-            local task = Task:new(id, ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward, ServerConfig.Tasks[i].xpReward, false, ServerConfig.Tasks[i].requirements)
+            local id = MySQL.insert.await(
+            'INSERT INTO splg_hunting_tasks (user_id, title, cash_reward, xp_reward, completed, requirements) VALUES (?, ?, ?, ?, ?, ?)',
+                { ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward, ServerConfig.Tasks[i].xpReward, false,
+                    ServerConfig.Tasks[i].requirements })
+            local task = Task:new(id, ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward,
+                ServerConfig.Tasks[i].xpReward, false, ServerConfig.Tasks[i].requirements)
             tasks[uniqueId][#tasks[uniqueId] + 1] = task
         end
     end

@@ -18,21 +18,21 @@ ui_page 'build/index.html'
 
 shared_scripts {
 	'@ox_lib/init.lua',
-	'bridge/init.lua'
 }
 
 client_scripts {
+	'@bl_bridge/imports/client.lua',
 	'client/*.lua'
 }
 
 server_scripts {
 	'@oxmysql/lib/MySQL.lua',
+	'@bl_bridge/imports/server.lua',
 	'server/*.lua'
 }
 
 files {
-    'locales/*.json',
+	'locales/*.json',
 	'build/**',
 	'config/*.lua',
-	'bridge/**'
 }
