@@ -49,7 +49,8 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     cashReward: 250,
                     xpReward: 5,
                     canClaim: true,
-                    requirements: ['x1 Bear Pelt']
+                    requirements: ['x1 Bear Pelt'],
+                    completionRatio: 0.5
                 },
                 {
                     id: 2,
@@ -57,7 +58,8 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     cashReward: 15,
                     xpReward: 12,
                     canClaim: true,
-                    requirements: ['x1 Deer Pelt']
+                    requirements: ['x1 Deer Pelt'],
+                    completionRatio: 0.8
                 },
                 {
                     id: 3,
@@ -65,15 +67,17 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     cashReward: 115,
                     xpReward: 5,
                     canClaim: true,
-                    requirements: ['x1 Rabbit Pelt']
+                    requirements: ['x1 Rabbit Pelt'],
+                    completionRatio: 0.2
                 },
                 {
                     id: 4,
-                    title: 'Murder cat Hunting',
+                    title: 'Murder Cat Hunting',
                     cashReward: 100,
                     xpReward: 10,
                     canClaim: true,
-                    requirements: ['x1 Mountain Lion Pelt']
+                    requirements: ['x1 Mountain Lion Pelt'],
+                    completionRatio: 0.7
                 },
                 {
                     id: 5,
@@ -81,15 +85,16 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     cashReward: 100,
                     xpReward: 10,
                     canClaim: true,
-                    requirements: ['x1 Bird Feather']
+                    requirements: ['x1 Bird Feather'],
+                    completionRatio: 1.1
                 },
                 {
                     id: 6,
-                    title: 'Task 6',
                     cashReward: 100,
                     xpReward: 10,
                     canClaim: true,
-                    requirements: ['x1 random item']
+                    requirements: ['x1 random item'],
+                    completionRatio: 0.9
                 },
                 
             ];

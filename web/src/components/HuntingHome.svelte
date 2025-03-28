@@ -32,6 +32,7 @@
 					xpReward={task.xpReward}
 					canClaim={task.canClaim}
 					requirements={task.requirements}
+					completionRatio={task.completionRatio}
 				/>
 			{/each}
 		</div>

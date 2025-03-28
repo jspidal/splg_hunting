@@ -148,7 +148,8 @@ RegisterNetEvent('splg_hunting:server:recordDistance', function(victimId, attack
 end)
 
 lib.callback.register('splg_hunting:server:getTasks', function(source)
-
+    local uniqueId <const> = core.GetPlayer(source).id
+    return tasks[uniqueId]
 end)
 
 -- Choose initial tasks for player
@@ -171,7 +172,7 @@ local function initialTasks(uniqueId)
         end
         for i = 1, 6 do
             local id = MySQL.insert.await(
-            'INSERT INTO splg_hunting_tasks (user_id, title, cash_reward, xp_reward, completed, requirements) VALUES (?, ?, ?, ?, ?, ?)',
+                'INSERT INTO splg_hunting_tasks (user_id, title, cash_reward, xp_reward, completed, requirements) VALUES (?, ?, ?, ?, ?, ?)',
                 { ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward, ServerConfig.Tasks[i].xpReward, false,
                     ServerConfig.Tasks[i].requirements })
             local task = Task:new(id, ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward,
@@ -181,4 +182,7 @@ local function initialTasks(uniqueId)
     end
 end
 
-exports('initialTasks', initialTasks)
+AddEventHandler('bl_bridge:server:playerLoaded', function(src)
+    local uniqueId = core.GetPlayer(src).id
+    initialTasks(uniqueId)
+end)

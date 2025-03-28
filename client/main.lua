@@ -243,8 +243,9 @@ RegisterNUICallback(Receive.claimTask, function(data, cb)
 end)
 
 RegisterNUICallback(Receive.requestTasks, function(_, cb)
-    -- Request tasks logic
-    cb(1)
+    ---@type Task[]
+    local tasks = lib.callback.await('splg_hunting:server:getTasks')
+    cb(tasks or {})
 end)
 
 local function openNUI()

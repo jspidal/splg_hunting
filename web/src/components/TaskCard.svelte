@@ -5,11 +5,12 @@
 	import { SendEvent } from '@utils/eventsHandlers';
 	import { LOCALE } from '@stores/ui';
 	export let taskId: number;
-	export let title: string = '';
+	export let title: string = null;
 	export let cashReward: number;
 	export let xpReward: number;
 	export let canClaim: boolean;
 	export let requirements: string[] = [];
+	export let completionRatio: number = undefined;
 
 	function handleTaskButtonClick() {
 		SendEvent(Send.claimTask, taskId);
@@ -55,7 +56,8 @@
 			rounded="rounded-token"
 			track="bg-surface-400-500-token"
 			meter="bg-primary-500"
-			value={55}
+			value={completionRatio}
+			max={1}
 		/>
 		{#if $TASK_BUTTONS_VISIBLE}
 			<button

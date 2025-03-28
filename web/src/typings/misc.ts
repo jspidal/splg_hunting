@@ -10,6 +10,7 @@ export interface Task {
     xpReward: number;
     canClaim: boolean;
     requirements: string[];
+    completionRatio: number;
 }
 
 export interface DataEvent {
