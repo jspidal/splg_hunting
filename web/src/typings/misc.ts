@@ -8,7 +8,6 @@ export interface Task {
     title?: string;
     cashReward: number;
     xpReward: number;
-    canClaim: boolean;
     requirements: string[];
     completionRatio: number;
 }

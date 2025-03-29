@@ -1,6 +1,6 @@
 import { Send } from "@enums/events"
 import { DebugEventCallback } from "@typings/events"
-import { Task } from "@typings/misc"
+import { Task } from "@typings/task"
 import { DebugEventReceive } from "@utils/eventsHandlers"
 
 /**
@@ -48,7 +48,6 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     title: 'Bear Hunting',
                     cashReward: 250,
                     xpReward: 5,
-                    canClaim: true,
                     requirements: ['x1 Bear Pelt'],
                     completionRatio: 0.5
                 },
@@ -57,7 +56,6 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     title: 'Deer Hunting',
                     cashReward: 15,
                     xpReward: 12,
-                    canClaim: true,
                     requirements: ['x1 Deer Pelt'],
                     completionRatio: 0.8
                 },
@@ -66,7 +64,6 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     title: 'Rabbit Hunting',
                     cashReward: 115,
                     xpReward: 5,
-                    canClaim: true,
                     requirements: ['x1 Rabbit Pelt'],
                     completionRatio: 0.2
                 },
@@ -74,8 +71,7 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     id: 4,
                     title: 'Murder Cat Hunting',
                     cashReward: 100,
-                    xpReward: 10,
-                    canClaim: true,
+                    xpReward: 10, 
                     requirements: ['x1 Mountain Lion Pelt'],
                     completionRatio: 0.7
                 },
@@ -84,7 +80,6 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     title: 'Bird Hunting',
                     cashReward: 100,
                     xpReward: 10,
-                    canClaim: true,
                     requirements: ['x1 Bird Feather'],
                     completionRatio: 1.1
                 },
@@ -92,7 +87,6 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     id: 6,
                     cashReward: 100,
                     xpReward: 10,
-                    canClaim: true,
                     requirements: ['x1 random item'],
                     completionRatio: 0.9
                 },

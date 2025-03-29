@@ -165,7 +165,7 @@ local function initialTasks(uniqueId)
         if response and next(response) then
             for i = 1, #response do
                 local task = Task:new(response[i].id, response[i].title, response[i].cash_reward, response[i].xp_reward,
-                    false, response[i].requirements)
+                    response[i].requirements)
                 tasks[uniqueId][#tasks[uniqueId] + 1] = task
             end
             return
@@ -173,7 +173,7 @@ local function initialTasks(uniqueId)
         for i = 1, 6 do
             local id = MySQL.insert.await(
                 'INSERT INTO splg_hunting_tasks (user_id, title, cash_reward, xp_reward, completed, requirements) VALUES (?, ?, ?, ?, ?, ?)',
-                { ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward, ServerConfig.Tasks[i].xpReward, false,
+                { ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward, ServerConfig.Tasks[i].xpReward,
                     ServerConfig.Tasks[i].requirements })
             local task = Task:new(id, ServerConfig.Tasks[i].title, ServerConfig.Tasks[i].cashReward,
                 ServerConfig.Tasks[i].xpReward, false, ServerConfig.Tasks[i].requirements)

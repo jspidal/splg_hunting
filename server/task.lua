@@ -14,7 +14,6 @@ local TaskRequirementResult = {
 ---@field description string
 ---@field cashReward number
 ---@field xpReward number
----@field canClaim boolean
 ---@field requirements table<CarcassItem | 'any', TaskCondition>
 ---@field progress? table<CarcassItem | 'any', number>
 ---@field completionRatio number
@@ -22,12 +21,11 @@ local TaskRequirementResult = {
 
 local Task = lib.class('Task')
 
-function Task:constructor(id, title, cashReward, xpReward, canClaim, requirements, progress)
+function Task:constructor(id, title, cashReward, xpReward, requirements, progress)
     self.id = id
     self.title = title
     self.cashReward = cashReward
     self.xpReward = xpReward
-    self.canClaim = canClaim
     self.requirements = requirements
     self.progress = progress or {}
     self.completionRatio = 0

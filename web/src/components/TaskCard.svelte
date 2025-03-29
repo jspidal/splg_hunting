@@ -8,7 +8,6 @@
 	export let title: string = null;
 	export let cashReward: number;
 	export let xpReward: number;
-	export let canClaim: boolean;
 	export let requirements: string[] = [];
 	export let completionRatio: number = undefined;
 
@@ -62,7 +61,7 @@
 		{#if $TASK_BUTTONS_VISIBLE}
 			<button
 				class="btn variant-soft-primary ml-auto"
-				disabled={!canClaim}
+				disabled={completionRatio < 1}
 				on:click={handleTaskButtonClick}
 			>
 				{$LOCALE.BUTTON_COMPLETE_LABEL}

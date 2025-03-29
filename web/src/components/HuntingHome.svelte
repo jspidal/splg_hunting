@@ -30,7 +30,6 @@
 					title={task.title}
 					cashReward={task.cashReward}
 					xpReward={task.xpReward}
-					canClaim={task.canClaim}
 					requirements={task.requirements}
 					completionRatio={task.completionRatio}
 				/>
