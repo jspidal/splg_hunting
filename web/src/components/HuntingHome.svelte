@@ -3,7 +3,7 @@
 	import TaskCard from './TaskCard.svelte';
 	import { onMount } from 'svelte';
 	import { Send } from '@enums/events';
-	import type { Task } from '@typings/misc';
+	import type { Task } from '@typings/tasks';
 	import { LOCALE } from '@stores/ui';
 
 	let tasks: Task[] = [];

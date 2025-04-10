@@ -1,6 +1,6 @@
 import { Send } from "@enums/events"
 import { DebugEventCallback } from "@typings/events"
-import { Task } from "@typings/task"
+import { Task } from "@typings/tasks"
 import { DebugEventReceive } from "@utils/eventsHandlers"
 
 /**
@@ -45,18 +45,22 @@ const ReceiveDebuggers: DebugEventCallback[] = [
             const tasks: Task[] = [
                 {
                     id: 1,
-                    title: 'Bear Hunting',
+                    title: 'Boar-d Yet?',
                     cashReward: 250,
                     xpReward: 5,
-                    requirements: ['x1 Bear Pelt'],
+                    requirements: {
+                        'carcass_boar': { amount: 1 }, // Example of a requirement with an item type and amount
+                    },
                     completionRatio: 0.5
                 },
                 {
                     id: 2,
-                    title: 'Deer Hunting',
+                    title: 'Hawk Hunting',
                     cashReward: 15,
                     xpReward: 12,
-                    requirements: ['x1 Deer Pelt'],
+                    requirements: {
+                        'carcass_hawk': { amount: 1 },
+                    },
                     completionRatio: 0.8
                 },
                 {
@@ -64,7 +68,9 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     title: 'Rabbit Hunting',
                     cashReward: 115,
                     xpReward: 5,
-                    requirements: ['x1 Rabbit Pelt'],
+                    requirements: {
+                        'carcass_cormorant': { amount: 1}
+                    },
                     completionRatio: 0.2
                 },
                 {
@@ -72,22 +78,28 @@ const ReceiveDebuggers: DebugEventCallback[] = [
                     title: 'Murder Cat Hunting',
                     cashReward: 100,
                     xpReward: 10, 
-                    requirements: ['x1 Mountain Lion Pelt'],
+                    requirements: {
+                        'carcass_mtlion': {amount: 1 }
+                    },
                     completionRatio: 0.7
                 },
                 {
                     id: 5,
-                    title: 'Bird Hunting',
+                    title: 'Rabbit Season',
                     cashReward: 100,
                     xpReward: 10,
-                    requirements: ['x1 Bird Feather'],
+                    requirements: {
+                        'carcass_rabbit': {amount : 3}
+                    },
                     completionRatio: 1.1
                 },
                 {
                     id: 6,
                     cashReward: 100,
                     xpReward: 10,
-                    requirements: ['x1 random item'],
+                    requirements: {
+                        'carcass_deer': {amount: 2}
+                    },
                     completionRatio: 0.9
                 },
                 

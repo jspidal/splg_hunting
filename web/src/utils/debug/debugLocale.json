@@ -5,5 +5,18 @@
     "LOADING_LABEL": "Loading...",
     "AVAILABLE_TASKS_LABEL": "Available Tasks",
     "REQUIREMENTS_LABEL": "Requirements:",
-    "BUTTON_COMPLETE_LABEL": "Complete"
+    "BUTTON_COMPLETE_LABEL": "Complete",
+    "carcass_deer": "Deer Carcass",
+    "carcass_boar": "Boar Carcass",
+    "carcass_hawk": "Hawk Carcass",
+    "carcass_cormorant": "Cormorant Carcass",
+    "carcass_coyote": "Coyote Carcass",
+    "carcass_mtlion": "Mountain Lion Carcass",
+    "carcass_rabbit": "Rabbit Carcass",
+    "any": "Any Carcass",
+    "weapon": "Weapon",
+    "quality": "Quality",
+    "headshot": "Headshot",
+    "minDistance": "Minimum Distance",
+    "maxDistance": "Maximum Distance"
 }
