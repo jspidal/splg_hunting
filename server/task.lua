@@ -14,7 +14,7 @@ local TaskRequirementResult = {
 ---@field description string
 ---@field cashReward number
 ---@field xpReward number
----@field requirements table<CarcassItem | 'any', TaskCondition>
+---@field requirements table<CarcassItem | 'any', TaskRequirement>
 ---@field progress? table<CarcassItem | 'any', number>
 ---@field completionRatio number
 ---@field checkRequirements fun(self: Task, carcass: table, weapon: string, isHeadshot: boolean, distance: number): TaskRequirementResult

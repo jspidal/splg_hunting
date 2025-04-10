@@ -22,19 +22,19 @@ Config.Framework = 'qbx_core'
 
 ---@type table<number, CarcassEntity>
 Config.Carcass = {
-    [`a_c_boar`] =           {item = 'carcass_boar', headshotBones = {31086}, drag = true, xPos = -0.7, yPos = 1.2, zPos = -1.0, xRot = -200.0, yRot = 0.0, zRot = 0.0},
-    [`a_c_chickenhawk`] =   {item = 'carcass_hawk', headshotBones = {39317}, drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0},
-    [`a_c_cormorant`] =     {item = 'carcass_cormorant', headshotBones = {24818}, drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.4, xRot = 0.0, yRot = -90.0, zRot = 0.0},
-    [`a_c_coyote`] =        {item = 'carcass_coyote', headshotBones = {31086}, drag = false, xPos = -0.2, yPos = 0.15, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0},
-    [`a_c_deer`] =          {item = 'carcass_deer', headshotBones = {31086}, drag = true, xPos = 0.1, yPos = 1.0, zPos = -1.2, xRot = -200.0, yRot = 30.0, zRot = 0.0},
-    [`a_c_mtlion`] =        {item = 'carcass_mtlion', headshotBones = {31086}, drag = true, xPos = 0.1, yPos = 0.7, zPos = -1.0, xRot = -210.0, yRot = 0.0, zRot = 0.0},
-    [`a_c_rabbit_01`] =     {item = 'carcass_rabbit', headshotBones = {31086}, drag = false, xPos = 0.12, yPos = 0.25, zPos = 0.45, xRot = 0.0, yRot = 90.0, zRot = 0.0},
+    [`a_c_boar`] = { item = 'carcass_boar', headshotBones = { 31086 }, drag = true, xPos = -0.7, yPos = 1.2, zPos = -1.0, xRot = -200.0, yRot = 0.0, zRot = 0.0 },
+    [`a_c_chickenhawk`] = { item = 'carcass_hawk', headshotBones = { 39317 }, drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0 },
+    [`a_c_cormorant`] = { item = 'carcass_cormorant', headshotBones = { 24818 }, drag = false, xPos = 0.15, yPos = 0.2, zPos = 0.4, xRot = 0.0, yRot = -90.0, zRot = 0.0 },
+    [`a_c_coyote`] = { item = 'carcass_coyote', headshotBones = { 31086 }, drag = false, xPos = -0.2, yPos = 0.15, zPos = 0.45, xRot = 0.0, yRot = -90.0, zRot = 0.0 },
+    [`a_c_deer`] = { item = 'carcass_deer', headshotBones = { 31086 }, drag = true, xPos = 0.1, yPos = 1.0, zPos = -1.2, xRot = -200.0, yRot = 30.0, zRot = 0.0 },
+    [`a_c_mtlion`] = { item = 'carcass_mtlion', headshotBones = { 31086 }, drag = true, xPos = 0.1, yPos = 0.7, zPos = -1.0, xRot = -210.0, yRot = 0.0, zRot = 0.0 },
+    [`a_c_rabbit_01`] = { item = 'carcass_rabbit', headshotBones = { 31086 }, drag = false, xPos = 0.12, yPos = 0.25, zPos = 0.45, xRot = 0.0, yRot = 90.0, zRot = 0.0 },
 }
 
 Config.EnableSelling = false
 
 
----@class TaskCondition
+---@class TaskRequirement
 ---@field amount integer the required number of aniamls to complete the task
 ---@field weapon? string | integer the hash of the required weapon to kill the animal
 ---@field quality? number  the required quality of the carcass
@@ -46,7 +46,7 @@ Config.EnableSelling = false
 ---@field title string
 ---@field cashReward number
 ---@field xpReward number
----@field requirements table<CarcassItem | 'any', TaskCondition>
+---@field requirements table<CarcassItem | 'any', TaskRequirement>
 
 ---@type ConfigTask[]
 Config.Tasks = {
